@@ -46,7 +46,7 @@ import 'core-js/es/reflect';
 
 
 // for IE10
-import 'mutationobserver-shim'
+import 'mutationobserver-shim';
 
 /**
  * Required to support Web Animations `@angular/platform-browser/animations`.

@@ -1,7 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 // Import Containers
-import {LayoutComponent} from './layout/layout.component';
+import { LayoutComponent } from './layout/layout.component';
+import { GameComponent } from '@views/game/game.component';
 
 
 export const routes: Routes = [
@@ -11,7 +13,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: DashboardComponent,
+        component: GameComponent,
       }
     ]
   }
