@@ -1,0 +1,6 @@
+{
+  "production": {
+    "bucket": "morlok-kodenames",
+    "cloudfront_id": "E3CMNX22J7OVEO"
+  }
+}

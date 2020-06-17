@@ -1,0 +1,84 @@
+{
+  "name": "kodenames",
+  "version": "0.0.1",
+  "description": "Kodenames online board game",
+  "author": {
+    "name": "Ryan Morlok",
+    "github": "https://github.com/rmorlok",
+    "twitter": "https://twitter.com/rmorlok"
+  },
+  "contributors": [
+    {
+      "name": "Ryan Morlok",
+      "url": "https://github.com/rmorlok"
+    }
+  ],
+  "homepage": "https://kodenames.morlok.biz",
+  "copyright": "Copyright 2020 Ryan Morlok",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "webserver": "ng serve",
+    "build": "ng build --prod",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "gulp": "gulp",
+    "deploy": "gulp deploy",
+    "deploy:staging": "gulp deploy --env staging",
+    "deploy:production": "gulp deploy --env production",
+    "invalidate": "gulp invalidate",
+    "invalidate:staging": "gulp invalidate --env staging",
+    "invalidate:production": "gulp invalidate --env production"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^9.1.2",
+    "@angular/cdk": "^9.2.1",
+    "@angular/common": "^9.1.2",
+    "@angular/compiler": "^9.1.2",
+    "@angular/core": "^9.1.2",
+    "@angular/flex-layout": "^9.0.0-beta.29",
+    "@angular/forms": "^9.1.2",
+    "@angular/material": "^9.2.1",
+    "@angular/platform-browser": "^9.1.2",
+    "@angular/platform-browser-dynamic": "^9.1.2",
+    "@angular/router": "^9.1.2",
+    "angularfire2": "^5.4.2",
+    "core-js": "^3.6.5",
+    "firebase": "^7.14.3",
+    "font-awesome": "^4.7.0",
+    "mutationobserver-shim": "^0.3.5",
+    "natives": "^1.1.6",
+    "normalize.css": "^8.0.1",
+    "rxjs": "^6.5.5",
+    "rxjs-compat": "^6.5.5",
+    "simple-line-icons": "^2.4.1",
+    "ts-helpers": "^1.1.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.901.1",
+    "@angular-devkit/build-ng-packagr": "~0.901.1",
+    "@angular/cli": "^9.1.1",
+    "@angular/compiler-cli": "9.1.2",
+    "@angular/language-service": "^9.1.2",
+    "@types/deep-equal": "^1.0.1",
+    "@types/jasminewd2": "^2.0.6",
+    "@types/node": "^12.6.0",
+    "codelyzer": "^5.2.2",
+    "concurrent-transform": "^1.0.0",
+    "gulp": "^4.0.2",
+    "gulp-awspublish": "^4.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-cli": "^2.2.0",
+    "gulp-cloudfront-invalidate": "^0.1.5",
+    "ts-node": "^8.8.2",
+    "tslint": "^6.1.1",
+    "typescript": "~3.8.3",
+    "yargs": "^13.3.2"
+  },
+  "engines": {
+    "node": ">= 12.6.0",
+    "npm": ">= 6.10.0"
+  }
+}
