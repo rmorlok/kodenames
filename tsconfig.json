@@ -17,6 +17,7 @@
       "@app/*": ["app/*"],
       "@assets/*": ["assets/*"],
       "@environments/*": ["environments/*"],
+      "@models": ["app/models"],
       "@models/*": ["app/models/*"],
       "@views/*": ["app/views/*"],
       "@services/*": ["app/services/*"]

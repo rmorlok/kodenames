@@ -1,26 +1,32 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
-import {LayoutModule} from '@angular/cdk/layout';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HttpClientModule} from '@angular/common/http';
+import { LayoutModule } from '@angular/cdk/layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import {MaterialModule} from './material.module';
+import { MaterialModule } from './material.module';
 import { MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS } from '@angular/material/progress-spinner';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-import {AppComponent} from './app.component';
+import { AppComponent } from './app.component';
 
 // Import routing module
-import {AppRoutingModule} from './app.routing';
-import {LayoutComponent} from './layout/layout.component';
+import { AppRoutingModule } from './app.routing';
+import { LayoutComponent } from './layout/layout.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '@environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { CommonModule } from '@angular/common';
+import { ViewsModule } from '@views/views.module';
 
 @NgModule({
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
@@ -31,6 +37,9 @@ import {LayoutComponent} from './layout/layout.component';
     MaterialModule,
     ReactiveFormsModule,
     DragDropModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    ViewsModule
   ],
   declarations: [
     AppComponent,

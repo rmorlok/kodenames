@@ -1,2 +1,9 @@
-<div id="main-content">
+<kod-new-player
+        *ngIf="mode === 'create-player'"></kod-new-player>
+
+<kod-pick-game
+        *ngIf="mode === 'pick-game'"></kod-pick-game>
+
+<div id="main-content" *ngIf="mode === 'play'">
+
 </div>

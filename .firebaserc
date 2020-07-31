@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "kodenames-a9bda": {
+      "hosting": {
+        "kodenames": [
+          "kodenames-a9bda"
+        ]
+      }
+    }
+  }
+}

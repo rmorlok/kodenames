@@ -32,8 +32,7 @@
                 "./node_modules"
               ]
             },
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -112,6 +111,10 @@
               "**/node_modules/**"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
