@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Import Containers
 import { LayoutComponent } from './layout/layout.component';
-import { GameComponent } from '@views/game/game.component';
+import { TableComponent } from '@views/table/table.component';
 
 
 export const routes: Routes = [
@@ -13,7 +13,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: GameComponent,
+        component: TableComponent,
       }
     ]
   }

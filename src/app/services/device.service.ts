@@ -19,20 +19,20 @@ export class DeviceService {
         return this.stateSubject.asObservable();
     }
 
-    setGameId(gameId: string | null): void {
+    setTableId(tableId: string | null): void {
         const s = this.cloneState();
 
-        if (gameId) {
-            s.gameId = gameId;
+        if (tableId) {
+            s.tableId = tableId;
         } else {
-            delete s['gameId'];
+            delete s['tableId'];
         }
 
         this.saveState(s);
     }
 
-    clearGameId(): void {
-        this.setGameId(null);
+    clearTableId(): void {
+        this.setTableId(null);
     }
 
     setPerson(p: Person | null): void {

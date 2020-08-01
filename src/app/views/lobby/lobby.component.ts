@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DeviceService } from '@services/device.service';
-import { GameService } from '@services/game.service';
-import { DeviceState, Game, Player, Team } from '@models';
+import { TableService } from '@services/table.service';
+import { DeviceState, Table, Player, Team } from '@models';
 
 @Component({
   selector: 'kod-lobby',
@@ -11,23 +11,19 @@ import { DeviceState, Game, Player, Team } from '@models';
 })
 export class LobbyComponent {
   @Input()
-  game: Game | null;
+  table: Table | null;
 
   @Input()
   state: DeviceState | null;
 
-  constructor(
-      protected fb: FormBuilder,
-      private deviceService: DeviceService,
-      private gameService: GameService
-  ) {}
+  constructor() {}
 
   get myPlayer(): Player | null {
-    return this.game?.getPlayer(this.state?.person);
+    return this.table?.getPlayer(this.state?.person);
   }
 
   setTeam($event: {value: Team}): void {
-    if (!this.game || !this.state?.person) {
+    if (!this.table || !this.state?.person) {
       return;
     }
 
@@ -39,12 +35,12 @@ export class LobbyComponent {
         team: $event.value,
         spymaster: false
       };
-      this.game.players.push(p);
+      this.table.players.push(p);
     } else {
       p.team = $event.value;
     }
 
-    this.game.sendUpdate();
+    this.table.sendUpdate();
   }
 
   startGame(): void {

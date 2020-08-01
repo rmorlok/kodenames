@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Game, GAME_COLUMNS, GAME_ROWS } from '@models';
+import { Table, CARD_COLUMNS, CARD_ROWS } from '@models';
 
 @Component({
   selector: 'kod-cards',
@@ -8,7 +8,7 @@ import { Game, GAME_COLUMNS, GAME_ROWS } from '@models';
 })
 export class CardsComponent {
   @Input()
-  game: Game | null;
+  table: Table | null;
 
   @Input()
   isSpymaster: boolean;
@@ -16,16 +16,16 @@ export class CardsComponent {
   constructor() {}
 
   get rowCount(): number {
-    if (this.game) {
-      return GAME_ROWS;
+    if (this.table) {
+      return CARD_ROWS;
     } else {
       return 0;
     }
   }
 
   get columnCount(): number {
-    if (this.game) {
-      return GAME_COLUMNS;
+    if (this.table) {
+      return CARD_COLUMNS;
     } else {
       return 0;
     }

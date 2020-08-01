@@ -1,21 +1,21 @@
-<div id="pick-game">
+<div id="pick-table">
     <mat-card>
         <mat-card-header>Pick Teams</mat-card-header>
         <mat-card-content fxLayout="column">
-            <p fxFlex>Game ID#{{game.id}}</p>
+            <p fxFlex>Table ID#{{table.id}}</p>
             <div fxLayout="row">
                 <div fxLayout="column">
                     <mat-label>Red Players</mat-label>
                     <mat-list>
-                        <mat-list-item *ngFor="let player of game.redPlayers || []">{{ player.person.name }}</mat-list-item>
-                        <mat-list-item *ngIf="(game.redPlayers || []).length === 0"><em>No Players</em></mat-list-item>
+                        <mat-list-item *ngFor="let player of table.redPlayers || []">{{ player.person.name }}</mat-list-item>
+                        <mat-list-item *ngIf="(table.redPlayers || []).length === 0"><em>No Players</em></mat-list-item>
                     </mat-list>
                 </div>
                 <div fxLayout="column">
                     <mat-label>Blue Players</mat-label>
                     <mat-list>
-                        <mat-list-item *ngFor="let player of game.bluePlayers || []">{{ player.person.name }}</mat-list-item>
-                        <mat-list-item *ngIf="(game.bluePlayers || []).length === 0"><em>No Players</em></mat-list-item>
+                        <mat-list-item *ngFor="let player of table.bluePlayers || []">{{ player.person.name }}</mat-list-item>
+                        <mat-list-item *ngIf="(table.bluePlayers || []).length === 0"><em>No Players</em></mat-list-item>
                     </mat-list>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     mat-flat-button
                     color="primary"
                     (click)="startGame()">
-                Create new game&nbsp;&nbsp;
+                Create new table&nbsp;&nbsp;
                 <mat-icon matSuffix>fiber_new</mat-icon>
             </button>
         </mat-card-actions>

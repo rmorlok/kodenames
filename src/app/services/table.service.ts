@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
-    Game,
-    GameState
+    Table,
+    TableState
 } from '@models';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -10,15 +10,15 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore/collection/c
 @Injectable({
     providedIn: 'root',
 })
-export class GameService {
+export class TableService {
     constructor(
         private firestore: AngularFirestore
     ) {
     }
 
-    doesGameExist(gameId: string): Observable<boolean> {
+    doesTableExist(tableId: string): Observable<boolean> {
         return new Observable<boolean>(observer => {
-            const subscription = this.documentForId(gameId).get({source: 'server'}).subscribe(result => {
+            const subscription = this.documentForId(tableId).get({source: 'server'}).subscribe(result => {
                     if (result.exists) {
                         observer.next(true);
                     } else {
@@ -36,14 +36,14 @@ export class GameService {
         });
     }
 
-    getGame(gameId: string): Observable<Game> {
-        return new Observable<Game>(observer => {
-            const game = new Game(this.documentForId(gameId)),
-                s = game.ready$.subscribe(
+    getTable(tableId: string): Observable<Table> {
+        return new Observable<Table>(observer => {
+            const table = new Table(this.documentForId(tableId)),
+                s = table.ready$.subscribe(
                     ready => {
                         if (ready) {
                             s.unsubscribe();
-                            observer.next(game);
+                            observer.next(table);
                             observer.complete();
                         }
                     },
@@ -55,28 +55,28 @@ export class GameService {
         });
     }
 
-    createGame(): Observable<Game> {
-        return new Observable<Game>(observer => {
-            const gameId = Math.floor(Math.random() * 1000000).toString(10),
-                gameState = <GameState>{
-                    id: gameId,
+    createTable(): Observable<Table> {
+        return new Observable<Table>(observer => {
+            const tableId = Math.floor(Math.random() * 1000000).toString(10),
+                tableState = <TableState>{
+                    id: tableId,
                     players: [],
                     clues: [],
                     cards: []
                 },
-                doc = this.documentForId(gameId);
+                doc = this.documentForId(tableId);
 
-            doc.set(gameState);
+            doc.set(tableState);
 
-            const game = new Game(doc),
-                s = game.ready$.subscribe(
+            const table = new Table(doc),
+                s = table.ready$.subscribe(
                     ready => {
                         if (ready) {
-                            game.resetForNewGame();
-                            game.sendUpdate();
+                            table.resetForNewGame();
+                            table.sendUpdate();
 
                             s.unsubscribe();
-                            observer.next(game);
+                            observer.next(table);
                             observer.complete();
                         }
                     },
@@ -88,11 +88,11 @@ export class GameService {
         });
     }
 
-    private gameStateCollection(): AngularFirestoreCollection<GameState> {
-        return this.firestore.collection<GameState>('games');
+    private tableStateCollection(): AngularFirestoreCollection<TableState> {
+        return this.firestore.collection<TableState>('tables');
     }
 
-    private documentForId(gameId: string): AngularFirestoreDocument<GameState> {
-        return this.gameStateCollection().doc<GameState>(gameId);
+    private documentForId(tableId: string): AngularFirestoreDocument<TableState> {
+        return this.tableStateCollection().doc<TableState>(tableId);
     }
 }

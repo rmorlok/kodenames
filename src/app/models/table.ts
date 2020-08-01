@@ -7,22 +7,22 @@ import Words from '../../assets/data/words.json';
 import { Person } from '@models/person';
 import { Team } from '@models/team';
 
-export interface GameState {
+export interface TableState {
   id: string;
   started: boolean;
   players: Player[];
   clues: Clue[];
-  cards: Card[]; // This is a linear array of GAME_ROWS x GAME_COLUMNS elements
+  cards: Card[]; // This is a linear array of CARD_ROWS x CARD_COLUMNS elements
 }
 
-export const GAME_ROWS = 5;
-export const GAME_COLUMNS = 5;
+export const CARD_ROWS = 5;
+export const CARD_COLUMNS = 5;
 
-export class Game implements GameState {
+export class Table implements TableState {
   private readySubject = new BehaviorSubject<boolean>(false);
 
   constructor(
-      private stateDoc: AngularFirestoreDocument<GameState>
+      private stateDoc: AngularFirestoreDocument<TableState>
   ) {
       this.subscription = this.stateDoc.valueChanges().subscribe(gs => {
         this.state = gs;
@@ -54,7 +54,7 @@ export class Game implements GameState {
     return !!this.state?.started;
   }
 
-  private state: GameState | null;
+  private state: TableState | null;
   private subscription: Subscription;
 
   static popRandom<T>(arr: T[], fallback: T): T {
@@ -109,8 +109,8 @@ export class Game implements GameState {
   }
 
   cardFor(row: number, col: number): Card | null {
-    if (row < 0 || row >= GAME_ROWS || col < 0 || col >= GAME_COLUMNS) {
-      throw new Error(`Position ${row}, ${col} is outside 0-${GAME_ROWS},0-${GAME_COLUMNS}`);
+    if (row < 0 || row >= CARD_ROWS || col < 0 || col >= CARD_COLUMNS) {
+      throw new Error(`Position ${row}, ${col} is outside 0-${CARD_ROWS},0-${CARD_COLUMNS}`);
     }
 
     const pos = this.indexFor(row, col);
@@ -123,28 +123,28 @@ export class Game implements GameState {
   }
 
   private indexFor(row: number, col: number): number {
-    return row * GAME_COLUMNS + col;
+    return row * CARD_COLUMNS + col;
   }
 
   private newCards(): Card[] {
     const wrds = [...Words],
         redFirst = Math.random() > 0.5,
-        cardColors = Game.repeat('red', redFirst ? 9 : 8).concat(
-            Game.repeat('blue', redFirst ? 8 : 9)
+        cardColors = Table.repeat('red', redFirst ? 9 : 8).concat(
+            Table.repeat('blue', redFirst ? 8 : 9)
         ).concat(
             ['black']
         ).concat(
-            Game.repeat('yellow', (GAME_ROWS * GAME_COLUMNS) - 9 - 8 - 1)
+            Table.repeat('yellow', (CARD_ROWS * CARD_COLUMNS) - 9 - 8 - 1)
         );
 
     const cards = <Card[]>[];
 
-    for (let r = 0; r < GAME_ROWS; r++) {
-      for (let c = 0; c < GAME_COLUMNS; c++) {
+    for (let r = 0; r < CARD_ROWS; r++) {
+      for (let c = 0; c < CARD_COLUMNS; c++) {
         cards.push({
-          word: Game.popRandom(wrds, 'ERROR'),
+          word: Table.popRandom(wrds, 'ERROR'),
           revealed: false,
-          color: Game.popRandom(cardColors, 'black')
+          color: Table.popRandom(cardColors, 'black')
         });
       }
     }

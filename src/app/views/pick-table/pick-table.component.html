@@ -1,20 +1,20 @@
-<div id="pick-game">
+<div id="pick-table">
     <mat-card>
-        <mat-card-header>Join or create a game</mat-card-header>
+        <mat-card-header>Join or create a table</mat-card-header>
         <mat-card-content>
             <form [formGroup]="editForm">
                 <mat-form-field appearance="standard">
-                    <mat-label>Enter game ID</mat-label>
-                    <input matInput formControlName="gameId" placeholder="8675309">
-                    <mat-icon style="color: green" matSuffix *ngIf="this.formGameId.valid">check</mat-icon>
-                    <mat-icon style="color: red" matSuffix *ngIf="this.gameIdValue.length >=6 && !this.formGameId.valid">close</mat-icon>
+                    <mat-label>Enter table ID</mat-label>
+                    <input matInput formControlName="tableId" placeholder="8675309">
+                    <mat-icon style="color: green" matSuffix *ngIf="this.formTableId.valid">check</mat-icon>
+                    <mat-icon style="color: red" matSuffix *ngIf="this.tableIdValue.length >=6 && !this.formTableId.valid">close</mat-icon>
                 </mat-form-field>
                 <button
                         mat-flat-button
                         color="primary"
                         [disabled]="!editForm.valid"
                         (click)="join()">
-                    Join game&nbsp;&nbsp;
+                    Join table&nbsp;&nbsp;
                     <mat-icon matSuffix>fast_forward</mat-icon>
                 </button>
             </form>
@@ -23,8 +23,8 @@
             <button
                     mat-flat-button
                     color="primary"
-                    (click)="createGame()">
-                Create new game&nbsp;&nbsp;
+                    (click)="createTable()">
+                Create new table&nbsp;&nbsp;
                 <mat-icon matSuffix>fiber_new</mat-icon>
             </button>
         </mat-card-actions>

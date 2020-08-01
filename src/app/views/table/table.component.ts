@@ -1,23 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { DeviceService } from '@services/device.service';
-import { GameService } from '@services/game.service';
-import { DeviceState, Game, Player } from '@models';
+import { TableService } from '@services/table.service';
+import { DeviceState, Table, Player } from '@models';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 
-type UIMode = 'create-player' | 'pick-game' | 'lobby' | 'play';
+type UIMode = 'create-player' | 'pick-table' | 'lobby' | 'play';
 
 @Component({
-  selector: 'kod-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss'],
+  selector: 'kod-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss'],
 })
-export class GameComponent implements OnInit, OnDestroy {
-  items: Observable<any[]>;
+export class TableComponent implements OnInit, OnDestroy {
   stateSubscription: Subscription | null;
-  loadingGame = false;
-  game: Game | null;
+  loadingTable = false;
+  table: Table | null;
   state: DeviceState | null;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -26,7 +25,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   constructor(
       private deviceService: DeviceService,
-      private gameService: GameService,
+      private tableService: TableService,
       private breakpointObserver: BreakpointObserver,
   ) {
   }
@@ -47,9 +46,9 @@ export class GameComponent implements OnInit, OnDestroy {
   get mode(): UIMode {
     if (!this.state?.person) {
       return 'create-player';
-    } else if (!this.state?.gameId) {
-      return 'pick-game';
-    } else if (this.game && (!this.game.started || !this.myPlayer)) {
+    } else if (!this.state?.tableId) {
+      return 'pick-table';
+    } else if (this.table && (!this.table.started || !this.myPlayer)) {
       return 'lobby';
     } else {
       return 'play';
@@ -57,34 +56,34 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   get myPlayer(): Player | null {
-    return this.game?.getPlayer(this.state.person);
+    return this.table?.getPlayer(this.state.person);
   }
 
   get isSpymaster(): boolean {
     return !!this.myPlayer?.spymaster;
   }
 
-  leaveGame(): void {
-    this.game.removePlayer(this.state.person);
-    this.game.sendUpdate();
-    this.deviceService.clearGameId();
+  leaveTable(): void {
+    this.table.removePlayer(this.state.person);
+    this.table.sendUpdate();
+    this.deviceService.clearTableId();
   }
 
   logout(): void {
-    this.leaveGame();
+    this.leaveTable();
     this.deviceService.clearPerson();
   }
 
   private updateState(state: DeviceState) {
-    if (!state.gameId) {
-      this.game = null;
-    } else if (state?.gameId !== this.game?.id) {
-      this.game = null;
-      this.loadingGame = true;
-      const s = this.gameService.getGame(state.gameId).subscribe(game => {
+    if (!state.tableId) {
+      this.table = null;
+    } else if (state?.tableId !== this.table?.id) {
+      this.table = null;
+      this.loadingTable = true;
+      const s = this.tableService.getTable(state.tableId).subscribe(table => {
         s.unsubscribe();
-        this.game = game;
-        this.loadingGame = false;
+        this.table = table;
+        this.loadingTable = false;
       });
     }
 

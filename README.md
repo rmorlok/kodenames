@@ -1,6 +1,6 @@
 # Kodenames
 
-Angular implementation of online Kodenames board game.  Based on implementation by [ninjabunny](https://github.com/ninjabunny/KodeNames).
+Angular implementation of online Kodenames board game.  Inspired by the implementation by [ninjabunny](https://github.com/ninjabunny/KodeNames).
 
 # Local Development
 

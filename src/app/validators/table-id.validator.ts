@@ -6,12 +6,12 @@ import {
 } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { GameService } from '@services/game.service';
+import { TableService } from '@services/table.service';
 
 @Injectable({providedIn: 'root'})
-export class GameIdValidator implements AsyncValidator {
+export class TableIdValidator implements AsyncValidator {
     constructor(
-        private gameServe: GameService
+        private tableService: TableService
     ) {
     }
 
@@ -19,12 +19,12 @@ export class GameIdValidator implements AsyncValidator {
         ctrl: AbstractControl
     ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
         if (!ctrl.value || ctrl.value.toString().length < 6) {
-            return of({gameIdInvalid: true});
+            return of({tableIdInvalid: true});
         }
 
-        return this.gameServe.doesGameExist(ctrl.value.toString()).pipe(
-            map(exists => (exists ? null : {gameIdInvalid: true})),
-            catchError(() => of({gameIdInvalid: true}))
+        return this.tableService.doesTableExist(ctrl.value.toString()).pipe(
+            map(exists => (exists ? null : {tableIdInvalid: true})),
+            catchError(() => of({tableIdInvalid: true}))
         );
     }
 }

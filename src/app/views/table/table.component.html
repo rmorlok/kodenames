@@ -1,12 +1,12 @@
 <kod-new-player
         *ngIf="mode === 'create-player'"></kod-new-player>
 
-<kod-pick-game
-        *ngIf="mode === 'pick-game'"></kod-pick-game>
+<kod-pick-table
+        *ngIf="mode === 'pick-table'"></kod-pick-table>
 
 <kod-lobby
         *ngIf="mode === 'lobby'"
-        [game]="game"
+        [table]="table"
         [state]="state"></kod-lobby>
 
 <ng-container *ngIf="mode === 'play'">
@@ -16,7 +16,7 @@
                 <img class="header-logo-img" src="/assets/img/MorlokTechnologiesIcon.png" />
             </div>
             KODENAMES
-            <div id="game-id" *ngIf="game">GAME ID#{{game.id}}</div>
+            <div id="table-id" *ngIf="table">TABLE ID#{{table.id}}</div>
             <button type="button" aria-label="Toggle sidenav" mat-button (click)="drawer.toggle()" *ngIf="(isHandset$ | async)">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
@@ -34,9 +34,9 @@
                 <mat-icon style="margin-top: 5px">more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" style="padding-right: 10px;">
-                <button mat-menu-item (click)="leaveGame()">
+                <button mat-menu-item (click)="leaveTable()">
                     <mat-icon>videogame_asset</mat-icon>
-                    <span>Leave game</span>
+                    <span>Leave table</span>
                 </button>
                 <button mat-menu-item (click)="logout()">
                     <mat-icon>lock</mat-icon>
@@ -56,7 +56,7 @@
                 </mat-list>
             </mat-sidenav>
             <mat-sidenav-content>
-                <kod-cards [game]="game" [isSpymaster]="isSpymaster"></kod-cards>
+                <kod-cards [table]="table" [isSpymaster]="isSpymaster"></kod-cards>
             </mat-sidenav-content>
         </mat-sidenav-container>
 
