@@ -43,7 +43,7 @@ import { ViewsModule } from '@views/views.module';
   ],
   declarations: [
     AppComponent,
-    LayoutComponent,
+    LayoutComponent
   ],
   entryComponents: [
   ],

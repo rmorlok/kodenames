@@ -4,6 +4,61 @@
 <kod-pick-game
         *ngIf="mode === 'pick-game'"></kod-pick-game>
 
-<div id="main-content" *ngIf="mode === 'play'">
+<kod-lobby
+        *ngIf="mode === 'lobby'"
+        [game]="game"
+        [state]="state"></kod-lobby>
 
-</div>
+<ng-container *ngIf="mode === 'play'">
+    <ng-container>
+        <mat-toolbar class="primary-toolbar header-wrapper">
+            <div class="header-logo-img-wrapper">
+                <img class="header-logo-img" src="/assets/img/MorlokTechnologiesIcon.png" />
+            </div>
+            KODENAMES
+            <div id="game-id" *ngIf="game">GAME ID#{{game.id}}</div>
+            <button type="button" aria-label="Toggle sidenav" mat-button (click)="drawer.toggle()" *ngIf="(isHandset$ | async)">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span fxFlex></span>
+
+            <button mat-button
+                    id="my-profile-button"
+                    [matMenuTriggerFor]="menu">
+                <div fxLayout="row" fxFlex>
+                    <div class="avatar">
+                        <img src="/assets/img/user.png" class="profile-img" [alt]="state.person.name" />
+                    </div>
+                    {{ state.person.name }}
+                </div>
+                <mat-icon style="margin-top: 5px">more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" style="padding-right: 10px;">
+                <button mat-menu-item (click)="leaveGame()">
+                    <mat-icon>videogame_asset</mat-icon>
+                    <span>Leave game</span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>lock</mat-icon>
+                    <span>Log out</span>
+                </button>
+            </mat-menu>
+        </mat-toolbar>
+
+        <mat-sidenav-container class="sidenav-container">
+            <mat-sidenav #drawer class="sidenav"
+                         fixedInViewport="true"
+                         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                         [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                         [opened]="!(isHandset$ | async)">
+                <mat-list>
+
+                </mat-list>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                <kod-cards [game]="game" [isSpymaster]="isSpymaster"></kod-cards>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+
+    </ng-container>
+</ng-container>

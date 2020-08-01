@@ -2,33 +2,45 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { DeviceService } from '@services/device.service';
 import { GameService } from '@services/game.service';
+import { GameIdValidator } from '@app/validators/game-id.validator';
 
 @Component({
   selector: 'kod-pick-game',
   templateUrl: './pick-game.component.html',
-  styleUrls: ['./pick-game.component.css'],
+  styleUrls: ['./pick-game.component.scss'],
 })
 export class PickGameComponent {
   editForm = this.fb.group({
-    name: ['', Validators.required]
+    gameId: [
+        '',
+      Validators.required,
+      this.gameIdValidator.validate.bind(this.gameIdValidator)
+    ]
   });
 
   constructor(
       protected fb: FormBuilder,
       private deviceService: DeviceService,
-      private gameService: GameService
+      private gameService: GameService,
+      private gameIdValidator: GameIdValidator
   ) {}
 
-  get formName(): AbstractControl | null {
-    return this.editForm.get('name');
+  get formGameId(): AbstractControl | null {
+    return this.editForm.get('gameId');
   }
 
-  get nameValue(): string | null {
-    return this.formName.value as string;
+  get gameIdValue(): string | null {
+    return this.formGameId.value as string;
   }
 
-  set nameValue(v: string | null) {
-    this.formName.setValue(v);
+  set gameIdValue(v: string | null) {
+    this.formGameId.setValue(v);
+  }
+
+  join(): void {
+    if (this.editForm.valid) {
+      this.deviceService.setGameId(this.gameIdValue);
+    }
   }
 
   createGame(): void {

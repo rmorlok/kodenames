@@ -4,16 +4,19 @@ import { Card, CardColor } from './card';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import Words from '../../assets/data/words.json';
+import { Person } from '@models/person';
+import { Team } from '@models/team';
 
 export interface GameState {
   id: string;
+  started: boolean;
   players: Player[];
   clues: Clue[];
   cards: Card[]; // This is a linear array of GAME_ROWS x GAME_COLUMNS elements
 }
 
-const GAME_ROWS = 5;
-const GAME_COLUMNS = 5;
+export const GAME_ROWS = 5;
+export const GAME_COLUMNS = 5;
 
 export class Game implements GameState {
   private readySubject = new BehaviorSubject<boolean>(false);
@@ -47,8 +50,63 @@ export class Game implements GameState {
     return this.state?.cards || [];
   }
 
+  get started(): boolean {
+    return !!this.state?.started;
+  }
+
   private state: GameState | null;
   private subscription: Subscription;
+
+  static popRandom<T>(arr: T[], fallback: T): T {
+    if (arr.length === 0) {
+      return fallback;
+    }
+
+    const chosen = Math.floor(Math.random() * arr.length),
+        val = arr[chosen];
+    arr.splice(chosen, 1);
+    return val;
+  }
+
+  static repeat(v: CardColor, count: number): CardColor[] {
+    const vals = [];
+
+    for (let i = 0; i < count; i++) {
+      vals.push(v);
+    }
+
+    return vals;
+  }
+
+  get redPlayers(): Player[] {
+    return this.playersForTeam('red');
+  }
+
+  get bluePlayers(): Player[] {
+    return this.playersForTeam('blue');
+  }
+
+  playersForTeam(team: Team): Player[] {
+      return this.players.filter(p => p.team === team);
+  }
+
+  getPlayer(person: Person | null): Player | null {
+    if (!person) {
+      return null;
+    }
+
+    const filtered = this.players.filter(player => player.person.uuid === person.uuid);
+
+    if (filtered.length === 0) {
+      return null;
+    } else {
+      return filtered[0];
+    }
+  }
+
+  removePlayer(person: Person): void {
+    this.state.players = this.players.filter(player => player.person.uuid !== person.uuid);
+  }
 
   cardFor(row: number, col: number): Card | null {
     if (row < 0 || row >= GAME_ROWS || col < 0 || col >= GAME_COLUMNS) {
@@ -65,39 +123,18 @@ export class Game implements GameState {
   }
 
   private indexFor(row: number, col: number): number {
-    return row * GAME_COLUMNS + col
-  }
-
-  static popRandom<T>(arr: T[], fallback: T): T {
-    if (arr.length === 0) {
-      return fallback;
-    }
-
-    const chosen = Math.floor(Math.random() * arr.length),
-        val = arr[chosen];
-    arr.splice(chosen, 1);
-    return val;
-  }
-
-  private repeat(v: CardColor, count: number): CardColor[] {
-    const vals = [];
-
-    for (let i = 0; i < count; i++) {
-      vals.push(v);
-    }
-
-    return vals;
+    return row * GAME_COLUMNS + col;
   }
 
   private newCards(): Card[] {
     const wrds = [...Words],
         redFirst = Math.random() > 0.5,
-        cardColors = this.repeat('red', redFirst ? 9 : 8).concat(
-            this.repeat('blue', redFirst ? 8 : 9)
+        cardColors = Game.repeat('red', redFirst ? 9 : 8).concat(
+            Game.repeat('blue', redFirst ? 8 : 9)
         ).concat(
             ['black']
         ).concat(
-            this.repeat('yellow', (GAME_ROWS * GAME_COLUMNS) - 9 - 8 - 1)
+            Game.repeat('yellow', (GAME_ROWS * GAME_COLUMNS) - 9 - 8 - 1)
         );
 
     const cards = <Card[]>[];

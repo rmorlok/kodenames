@@ -1,18 +1,19 @@
-<div id="new-player">
+<div id="pick-game">
     <mat-card>
         <mat-card-header>Join or create a game</mat-card-header>
         <mat-card-content>
             <form [formGroup]="editForm">
                 <mat-form-field appearance="standard">
                     <mat-label>Enter game ID</mat-label>
-                    <input matInput formControlName="name" placeholder="8675309">
-                    <mat-icon style="color: green" matSuffix>check</mat-icon>
+                    <input matInput formControlName="gameId" placeholder="8675309">
+                    <mat-icon style="color: green" matSuffix *ngIf="this.formGameId.valid">check</mat-icon>
+                    <mat-icon style="color: red" matSuffix *ngIf="this.gameIdValue.length >=6 && !this.formGameId.valid">close</mat-icon>
                 </mat-form-field>
                 <button
                         mat-flat-button
                         color="primary"
                         [disabled]="!editForm.valid"
-                        (click)="createPerson()">
+                        (click)="join()">
                     Join game&nbsp;&nbsp;
                     <mat-icon matSuffix>fast_forward</mat-icon>
                 </button>

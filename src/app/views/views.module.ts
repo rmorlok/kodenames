@@ -7,12 +7,14 @@ import { NewPlayerComponent } from '@views/new-player/new-player.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PickGameComponent } from '@views/pick-game/pick-game.component';
+import { LobbyComponent } from '@views/lobby/lobby.component';
 
 const components = [
     CardsComponent,
     NewPlayerComponent,
     GameComponent,
-    PickGameComponent
+    PickGameComponent,
+    LobbyComponent
 ];
 
 @NgModule({

@@ -13,7 +13,28 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore/collection/c
 export class GameService {
     constructor(
         private firestore: AngularFirestore
-    ) {}
+    ) {
+    }
+
+    doesGameExist(gameId: string): Observable<boolean> {
+        return new Observable<boolean>(observer => {
+            const subscription = this.documentForId(gameId).get({source: 'server'}).subscribe(result => {
+                    if (result.exists) {
+                        observer.next(true);
+                    } else {
+                        observer.next(false);
+                    }
+
+                    subscription.unsubscribe();
+                    observer.complete();
+                },
+                _err => {
+                    subscription.unsubscribe();
+                    observer.next(false);
+                    observer.complete();
+                });
+        });
+    }
 
     getGame(gameId: string): Observable<Game> {
         return new Observable<Game>(observer => {

@@ -5,7 +5,7 @@ import { DeviceService } from '@services/device.service';
 @Component({
   selector: 'kod-new-player',
   templateUrl: './new-player.component.html',
-  styleUrls: ['./new-player.component.css'],
+  styleUrls: ['./new-player.component.scss'],
 })
 export class NewPlayerComponent {
   editForm = this.fb.group({
