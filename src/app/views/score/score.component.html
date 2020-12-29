@@ -1,0 +1,8 @@
+<div id="score">
+    <div *ngIf="table.winner === 'red'" class="winner red">Red Wins!</div>
+    <div *ngIf="table.winner === 'blue'" class="winner blue">Blue Wins!</div>
+    <div *ngIf="table.winner === null">
+        <span class="red">Red: {{ table.redRemaining}}</span>&nbsp;
+        <span class="blue">Blue: {{ table.blueRemaining}}</span>
+    </div>
+</div>

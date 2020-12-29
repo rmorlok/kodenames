@@ -1,40 +1,92 @@
-<div id="pick-table">
-    <mat-card>
-        <mat-card-header>Pick Teams</mat-card-header>
-        <mat-card-content fxLayout="column">
-            <p fxFlex>Table ID#{{table.id}}</p>
-            <div fxLayout="row">
-                <div fxLayout="column">
-                    <mat-label>Red Players</mat-label>
-                    <mat-list>
-                        <mat-list-item *ngFor="let player of table.redPlayers || []">{{ player.person.name }}</mat-list-item>
-                        <mat-list-item *ngIf="(table.redPlayers || []).length === 0"><em>No Players</em></mat-list-item>
-                    </mat-list>
+<div class="single-card-page">
+    <div id="lobby">
+        <mat-card>
+            <mat-card-content fxLayout="column">
+                <h1>Pick Teams</h1>
+
+                <p id="table-id">Table ID#{{table.id}}</p>
+                <div id="player-list-wrapper">
+                    <div id="player-list" fxLayout="row">
+                        <div fxLayout="column">
+                            <h3 class="red">Red Spymaster</h3>
+                            <ul>
+                                <li *ngIf="spyMaster('red')">
+                                    <span>{{ spyMaster('red').person.name }}</span><ng-container *ngIf="spyMaster('red') === myPlayer">&nbsp; (me)</ng-container>
+                                </li>
+                                <li *ngIf="!spyMaster('red')"><em>No Spymaster</em></li>
+                            </ul>
+                            <h3 class="red">Red Players</h3>
+                            <ul>
+                                <li *ngFor="let player of nonSpymasterPlayers('red')">
+                                    <span>{{ player.person.name }}</span><ng-container *ngIf="player === myPlayer">&nbsp; (me)</ng-container>
+                                </li>
+                                <li *ngIf="nonSpymasterPlayers('red').length === 0"><em>No Players</em></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="blue">Blue Spymaster</h3>
+                            <ul>
+                                <li *ngIf="spyMaster('blue')">
+                                    <span>{{ spyMaster('blue').person.name }}</span><ng-container *ngIf="spyMaster('blue') === myPlayer">&nbsp; (me)</ng-container>
+                                </li>
+                                <li *ngIf="!spyMaster('blue')"><em>No Spymaster</em></li>
+                            </ul>
+                            <h3 class="blue">Blue Players</h3>
+                            <ul>
+                                <li *ngFor="let player of nonSpymasterPlayers('blue')">
+                                    <span>{{ player.person.name }}</span>
+                                </li>
+                                <li *ngIf="nonSpymasterPlayers('blue').length === 0"><em>No Players</em></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div fxLayout="column">
-                    <mat-label>Blue Players</mat-label>
-                    <mat-list>
-                        <mat-list-item *ngFor="let player of table.bluePlayers || []">{{ player.person.name }}</mat-list-item>
-                        <mat-list-item *ngIf="(table.bluePlayers || []).length === 0"><em>No Players</em></mat-list-item>
-                    </mat-list>
+                <div fxLayout="row">
+                    <mat-label>My team:</mat-label>
+                    <mat-button-toggle-group name="team" aria-label="Font Style" [value]="myPlayer?.team"
+                                             (change)="setTeam($event)">
+                        <mat-button-toggle value="red">Red Team
+                            <mat-icon *ngIf="myPlayer?.team === 'red'">check</mat-icon>
+                        </mat-button-toggle>
+                        <mat-button-toggle value="blue">Blue Team
+                            <mat-icon *ngIf="myPlayer?.team === 'blue'">check</mat-icon>
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
                 </div>
-            </div>
-            <div fxLayout="row">
-                <mat-label>My team:</mat-label>
-                <mat-button-toggle-group name="team" aria-label="Font Style" [value]="myPlayer?.team" (change)="setTeam($event)">
-                    <mat-button-toggle value="red">Red Team <mat-icon *ngIf="myPlayer?.team === 'red'">check</mat-icon></mat-button-toggle>
-                    <mat-button-toggle value="blue">Blue Team <mat-icon *ngIf="myPlayer?.team === 'blue'">check</mat-icon></mat-button-toggle>
-                </mat-button-toggle-group>
-            </div>
-        </mat-card-content>
-        <mat-card-actions>
-            <button
-                    mat-flat-button
-                    color="primary"
-                    (click)="startGame()">
-                Create new table&nbsp;&nbsp;
-                <mat-icon matSuffix>fiber_new</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
+                <div fxLayout="row">
+                    <button
+                            mat-stroked-button
+                            color="warn"
+                            *ngIf="myPlayer && !myPlayer.spymaster"
+                            (click)="makeSpymaster()">
+                        I'm the spymaster
+                    </button>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button
+                        mat-flat-button
+                        color="warn"
+                        (click)="logout()">
+                    Logout
+                    <mat-icon matSuffix>close</mat-icon>
+                </button>
+                <button
+                        mat-flat-button
+                        color="primary"
+                        (click)="leave()">
+                    Leave Table
+                    <mat-icon matSuffix>exit_to_app</mat-icon>
+                </button>
+                <button
+                        mat-flat-button
+                        color="primary"
+                        [disabled]="!ready"
+                        (click)="startGame()">
+                    Start Game
+                    <mat-icon matSuffix>play_arrow</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>

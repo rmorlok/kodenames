@@ -4,8 +4,8 @@ import { Card, CardColor } from './card';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import Words from '../../assets/data/words.json';
-import { Person } from '@models/person';
-import { Team } from '@models/team';
+import { Person } from './person';
+import { reverseTeam, Team } from './team';
 
 export interface TableState {
   id: string;
@@ -54,8 +54,66 @@ export class Table implements TableState {
     return !!this.state?.started;
   }
 
+  set started(val: boolean) {
+    if (this.state) {
+      this.state.started = val;
+    }
+  }
+
+  get winner(): Team | null {
+    if (this.state) {
+      // Check for someone chosing the black card
+      for (const clue of this.clues) {
+        for (const card of clue.chosenCards) {
+          if (card.color === 'black') {
+            return reverseTeam(clue.team);
+          }
+        }
+      }
+
+      if (this.redRemaining === 0) {
+        return 'red';
+      } else if (this.blueRemaining === 0) {
+        return 'blue';
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  get blueRemaining(): number {
+    return this.remaining('blue');
+  }
+
+  get redRemaining(): number {
+    return this.remaining('red');
+  }
+
+  get validToPlay(): boolean {
+    return this.redPlayers.length >= 2
+        && this.bluePlayers.length >= 2
+        && !!this.redSpymaster
+        && !!this.blueSpymaster;
+  }
+
   private state: TableState | null;
   private subscription: Subscription;
+
+  remaining(team: Team): number {
+    let left = 0;
+
+    for (const card of this.cards) {
+      if (!card.revealed) {
+        if (card.color === team) {
+          left++;
+        }
+      }
+    }
+
+    return left;
+  }
 
   static popRandom<T>(arr: T[], fallback: T): T {
     if (arr.length === 0) {
@@ -90,6 +148,24 @@ export class Table implements TableState {
       return this.players.filter(p => p.team === team);
   }
 
+  get redSpymaster(): Player | null {
+    return this.spymasterForTeam('red');
+  }
+
+  get blueSpymaster(): Player | null {
+    return this.spymasterForTeam('blue');
+  }
+
+  spymasterForTeam(team: Team): Player | null {
+    const ps = this.players.filter(p => p.team === team && p.spymaster);
+
+    if (ps.length >= 1) {
+      return ps[0];
+    } else {
+      return null;
+    }
+  }
+
   getPlayer(person: Person | null): Player | null {
     if (!person) {
       return null;
@@ -106,6 +182,10 @@ export class Table implements TableState {
 
   removePlayer(person: Person): void {
     this.state.players = this.players.filter(player => player.person.uuid !== person.uuid);
+
+    if (!this.validToPlay && this.state) {
+      this.state.started = false;
+    }
   }
 
   cardFor(row: number, col: number): Card | null {

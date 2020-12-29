@@ -1,3 +1,10 @@
 body {
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
+
+.single-card-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

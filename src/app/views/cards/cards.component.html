@@ -1,11 +1,18 @@
-<div id="cards-wrapper" fxFlex>
+<div id="cards-wrapper"
+     fxLayout="column"
+     fxLayoutGap="10px">
     <div *ngFor="let x of [].constructor(rowCount); let row = index"
          class="card-row"
          fxLayout="row"
+         fxFlex
          fxLayoutGap="10px">
         <div *ngFor="let y of [].constructor(columnCount); let col = index"
+             [class.red]="showRed(row, col)"
+             [class.blue]="showBlue(row, col)"
+             [class.yellow]="showYellow(row, col)"
+             [class.black]="showBlack(row, col)"
              class="card"
              fxFlex
-             fxLayoutGap="5px">{{ table.cardFor(row, col).word }}</div>
+             fxLayoutAlign="center center">{{ table.cardFor(row, col).word }}</div>
     </div>
 </div>

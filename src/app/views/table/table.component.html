@@ -6,33 +6,43 @@
 
 <kod-lobby
         *ngIf="mode === 'lobby'"
-        [table]="table"
-        [state]="state"></kod-lobby>
+        [table]="table"></kod-lobby>
 
 <ng-container *ngIf="mode === 'play'">
     <ng-container>
-        <mat-toolbar class="primary-toolbar header-wrapper">
-            <div class="header-logo-img-wrapper">
-                <img class="header-logo-img" src="/assets/img/MorlokTechnologiesIcon.png" />
-            </div>
-            KODENAMES
-            <div id="table-id" *ngIf="table">TABLE ID#{{table.id}}</div>
-            <button type="button" aria-label="Toggle sidenav" mat-button (click)="drawer.toggle()" *ngIf="(isHandset$ | async)">
-                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-            </button>
-            <span fxFlex></span>
-
-            <button mat-button
-                    id="my-profile-button"
-                    [matMenuTriggerFor]="menu">
-                <div fxLayout="row" fxFlex>
-                    <div class="avatar">
-                        <img src="/assets/img/user.png" class="profile-img" [alt]="state.person.name" />
-                    </div>
-                    {{ state.person.name }}
+        <mat-toolbar class="primary-toolbar header-wrapper"
+                     fxLayout="row">
+            <div>
+                <div class="header-logo-img-wrapper" fxFlex>
+                    <img class="header-logo-img" src="/assets/img/MorlokTechnologiesIcon.png" />
                 </div>
-                <mat-icon style="margin-top: 5px">more_vert</mat-icon>
-            </button>
+            </div>
+            <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly center" >
+                <div id="table-id" *ngIf="table">TABLE ID#{{table.id}}</div>
+                <kod-score [table]="table"></kod-score>
+            </div>
+            <div>
+                <button type="button" aria-label="Toggle sidenav" mat-button (click)="drawer.toggle()" *ngIf="(isHandset$ | async)">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+                <button mat-button
+                        id="my-profile-button"
+                        [matMenuTriggerFor]="menu"
+                        class="personButton"
+                        [class.red]="myPlayer.team === 'red'"
+                        [class.blue]="myPlayer.team === 'blue'">
+                    <div fxLayout="row" fxFlex>
+                        <div class="avatar">
+                            <img src="/assets/img/user.png" class="profile-img" [alt]="state.person.name" />
+                        </div>&nbsp;
+                        <span class="name">
+                            {{ state.person.name }}
+                            <span *ngIf="myPlayer.spymaster">(spymaster)</span>
+                        </span>
+                    </div>
+                    <mat-icon style="margin-top: 5px">more_vert</mat-icon>
+                </button>
+            </div>
             <mat-menu #menu="matMenu" style="padding-right: 10px;">
                 <button mat-menu-item (click)="leaveTable()">
                     <mat-icon>videogame_asset</mat-icon>

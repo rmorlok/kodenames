@@ -8,13 +8,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PickTableComponent } from '@views/pick-table/pick-table.component';
 import { LobbyComponent } from '@views/lobby/lobby.component';
+import { ScoreComponent } from '@views/score/score.component';
 
 const components = [
     CardsComponent,
     NewPlayerComponent,
     TableComponent,
     PickTableComponent,
-    LobbyComponent
+    LobbyComponent,
+    ScoreComponent
 ];
 
 @NgModule({
