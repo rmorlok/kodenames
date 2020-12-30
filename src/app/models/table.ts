@@ -11,6 +11,7 @@ export interface TableState {
   id: string;
   started: boolean;
   players: Player[];
+  turn: Team | null;
   clues: Clue[];
   cards: Card[]; // This is a linear array of CARD_ROWS x CARD_COLUMNS elements
 }
@@ -50,6 +51,10 @@ export class Table implements TableState {
     return this.state?.cards || [];
   }
 
+  get turn(): Team | null {
+    return this.state?.turn;
+  }
+
   get started(): boolean {
     return !!this.state?.started;
   }
@@ -60,9 +65,33 @@ export class Table implements TableState {
     }
   }
 
+  get currentClue(): Clue | null {
+    if (this.clues.length > 0) {
+      return this.clues[this.clues.length - 1];
+    } else {
+      return null;
+    }
+  }
+
+  get currentClueHasGuessesLeft(): boolean {
+    const currentClue = this.currentClue;
+    if (currentClue) {
+      if (currentClue.count === 'unlimited' || currentClue.count === 0) {
+        return !currentClue.passed &&
+            currentClue.chosenCards.every(card => card.color === currentClue.team);
+      } else {
+        return !currentClue.passed &&
+            currentClue.chosenCards.length < currentClue.count &&
+            currentClue.chosenCards.every(card => card.color === currentClue.team);
+      }
+    } else {
+      return false;
+    }
+  }
+
   get winner(): Team | null {
     if (this.state) {
-      // Check for someone chosing the black card
+      // Check for someone choosing the black card
       for (const clue of this.clues) {
         for (const card of clue.chosenCards) {
           if (card.color === 'black') {
@@ -98,8 +127,39 @@ export class Table implements TableState {
         && !!this.blueSpymaster;
   }
 
-  private state: TableState | null;
-  private subscription: Subscription;
+  reveal(row: number, col: number): void {
+    const card = this.cardFor(row, col),
+        clue = this.currentClue;
+
+    if (!card || !clue || card.revealed) {
+      return;
+    }
+
+    if (!this.currentClueHasGuessesLeft) {
+      return;
+    }
+
+    card.revealed = true;
+    clue.chosenCards.push(card);
+
+    if (!this.currentClueHasGuessesLeft) {
+      this.state.turn = reverseTeam(this.turn);
+    }
+
+    this.sendUpdate();
+  }
+
+  pass(): void {
+    const clue = this.currentClue;
+
+    if (!clue || !this.currentClueHasGuessesLeft) {
+      return;
+    }
+
+    clue.passed = true;
+    this.state.turn = reverseTeam(this.turn);
+    this.sendUpdate();
+  }
 
   remaining(team: Team): number {
     let left = 0;
@@ -114,6 +174,9 @@ export class Table implements TableState {
 
     return left;
   }
+
+  private state: TableState | null;
+  private subscription: Subscription;
 
   static popRandom<T>(arr: T[], fallback: T): T {
     if (arr.length === 0) {
@@ -236,9 +299,20 @@ export class Table implements TableState {
     this.stateDoc.update(this.state);
   }
 
+  returnToLobby(): void {
+    this.state.started = false;
+    this.sendUpdate();
+  }
+
   resetForNewGame(): void {
     this.state.clues = [];
     this.state.cards = this.newCards();
+
+    if (this.blueRemaining > this.redRemaining) {
+      this.state.turn = 'blue';
+    } else {
+      this.state.turn = 'red';
+    }
   }
 
   cleanUp(): void {

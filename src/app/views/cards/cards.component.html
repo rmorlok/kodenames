@@ -7,10 +7,16 @@
          fxFlex
          fxLayoutGap="10px">
         <div *ngFor="let y of [].constructor(columnCount); let col = index"
+             [class.revealed]="isRevealed(row, col)"
+             [class.spymaster]="isSpymaster"
+             [class.gameOver]="!!table.winner"
              [class.red]="showRed(row, col)"
              [class.blue]="showBlue(row, col)"
              [class.yellow]="showYellow(row, col)"
              [class.black]="showBlack(row, col)"
+             [class.green]="showGreen(row, col)"
+             [class.pickable]="canPick(row, col)"
+             (click)="revealCard(row, col)"
              class="card"
              fxFlex
              fxLayoutAlign="center center">{{ table.cardFor(row, col).word }}</div>

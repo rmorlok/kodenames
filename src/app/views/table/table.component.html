@@ -20,6 +20,9 @@
             <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly center" >
                 <div id="table-id" *ngIf="table">TABLE ID#{{table.id}}</div>
                 <kod-score [table]="table"></kod-score>
+                <button mat-button *ngIf="canGiveClue" (click)="giveClue()">Give Clue</button>
+                <button mat-button *ngIf="canPass" (click)="pass()">Pass</button>
+                <button mat-button *ngIf="showNewGame" (click)="newGame()">New Game</button>
             </div>
             <div>
                 <button type="button" aria-label="Toggle sidenav" mat-button (click)="drawer.toggle()" *ngIf="(isHandset$ | async)">
@@ -29,15 +32,15 @@
                         id="my-profile-button"
                         [matMenuTriggerFor]="menu"
                         class="personButton"
-                        [class.red]="myPlayer.team === 'red'"
-                        [class.blue]="myPlayer.team === 'blue'">
+                        [class.red]="myPlayer?.team === 'red'"
+                        [class.blue]="myPlayer?.team === 'blue'">
                     <div fxLayout="row" fxFlex>
                         <div class="avatar">
                             <img src="/assets/img/user.png" class="profile-img" [alt]="state.person.name" />
                         </div>&nbsp;
                         <span class="name">
                             {{ state.person.name }}
-                            <span *ngIf="myPlayer.spymaster">(spymaster)</span>
+                            <span *ngIf="myPlayer?.spymaster">(spymaster)</span>
                         </span>
                     </div>
                     <mat-icon style="margin-top: 5px">more_vert</mat-icon>
@@ -61,12 +64,10 @@
                          [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                          [mode]="(isHandset$ | async) ? 'over' : 'side'"
                          [opened]="!(isHandset$ | async)">
-                <mat-list>
-
-                </mat-list>
+                <kod-clues [table]="table" [myPlayer]="myPlayer"></kod-clues>
             </mat-sidenav>
             <mat-sidenav-content>
-                <kod-cards [table]="table" [isSpymaster]="isSpymaster"></kod-cards>
+                <kod-cards [table]="table" [myPlayer]="myPlayer"></kod-cards>
             </mat-sidenav-content>
         </mat-sidenav-container>
 

@@ -1,0 +1,59 @@
+@import '../../../scss/colors';
+
+#cards-wrapper {
+  padding: 10px;
+  height: 100%;
+}
+
+.clue {
+  color: #222;
+
+  &.red {
+    color: $redText;
+  }
+
+  &.blue {
+    color: $blueText;
+  }
+}
+
+.mat-line.answers {
+  white-space: normal;
+}
+
+.answer {
+  font-style: italic;
+
+  &.green {
+    color: $greenText;
+  }
+
+  &.wrongBlue {
+    color: $blueText;
+    font-style: normal;
+    font-weight: bold;
+  }
+
+  &.wrongRed {
+    color: $redText;
+    font-style: normal;
+    font-weight: bold;
+  }
+
+  &.wrongYellow {
+    color: $yellowText;
+    font-style: normal;
+    font-weight: bold;
+  }
+
+  &.wrongBlack {
+    color: black;
+    font-style: normal;
+    font-weight: bold;
+  }
+}
+
+.passed {
+  font-style: italic;
+  color: lightgrey;
+}

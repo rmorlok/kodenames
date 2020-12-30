@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Table, CARD_COLUMNS, CARD_ROWS, CardColor } from '@models';
+import { Table, CARD_COLUMNS, CARD_ROWS, CardColor, Player } from '@models';
 
 @Component({
   selector: 'kod-cards',
@@ -11,7 +11,7 @@ export class CardsComponent {
   table: Table | null;
 
   @Input()
-  isSpymaster: boolean;
+  myPlayer: Player;
 
   constructor() {}
 
@@ -31,6 +31,22 @@ export class CardsComponent {
     }
   }
 
+  get isSpymaster(): boolean {
+    return this.myPlayer.spymaster;
+  }
+
+  get iCanPick(): boolean {
+    return !this.isSpymaster && this.table.turn === this.myPlayer.team;
+  }
+
+  isRevealed(row: number, col: number): boolean {
+    return this.table.cardFor(row, col).revealed;
+  }
+
+  canPick(row: number, col: number): boolean {
+    return this.iCanPick && !this.table.cardFor(row, col).revealed;
+  }
+
   showRed(row: number, col: number): boolean {
     return this.show(row, col, 'red');
   }
@@ -47,11 +63,19 @@ export class CardsComponent {
     return this.show(row, col, 'black');
   }
 
-  show(row: number, col: number, color: CardColor): boolean {
+  showGreen(row: number, col: number): boolean {
     if (this.isSpymaster) {
-      return !this.table.cardFor(row, col).revealed && this.table.cardFor(row, col).color === color;
-    } else {
-      return this.table.cardFor(row, col).revealed && this.table.cardFor(row, col).color === color;
+      return this.table.cardFor(row, col).revealed && this.table.cardFor(row, col).color === this.myPlayer.team;
+    }
+  }
+
+  show(row: number, col: number, color: CardColor): boolean {
+    return this.table.cardFor(row, col).color === color;
+  }
+
+  revealCard(row: number, col: number) {
+    if (this.myPlayer.team === this.table.turn && !this.isSpymaster) {
+      this.table.reveal(row, col);
     }
   }
 }

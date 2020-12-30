@@ -86,12 +86,11 @@ export class LobbyComponent implements OnInit, OnDestroy {
   }
 
   leave(): void {
-    if (!this.myPlayer) {
-      return;
+    if (this.myPlayer) {
+      this.table.removePlayer(this.state?.person);
+      this.table.sendUpdate();
     }
 
-    this.table.removePlayer(this.state?.person);
-    this.table.sendUpdate();
     this.deviceService.clearTableId();
   }
 

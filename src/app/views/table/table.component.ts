@@ -5,6 +5,8 @@ import { TableService } from '@services/table.service';
 import { DeviceState, Table, Player } from '@models';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { GiveClueComponent, GiveClueData } from '@views/give-clue/give-clue.component';
 
 type UIMode = 'create-player' | 'pick-table' | 'lobby' | 'play';
 
@@ -27,6 +29,7 @@ export class TableComponent implements OnInit, OnDestroy {
       private deviceService: DeviceService,
       private tableService: TableService,
       private breakpointObserver: BreakpointObserver,
+      private dialog: MatDialog
   ) {
   }
 
@@ -63,6 +66,26 @@ export class TableComponent implements OnInit, OnDestroy {
     return !!this.myPlayer?.spymaster;
   }
 
+  get canGiveClue(): boolean {
+    return this.table &&
+        !this.table.winner &&
+        this.isSpymaster &&
+        this.table.turn === this.myPlayer.team &&
+        !this.table.currentClueHasGuessesLeft;
+  }
+
+  get canPass(): boolean {
+    return this.table &&
+        !this.table.winner &&
+        !this.isSpymaster &&
+        this.table.turn === this.myPlayer.team &&
+        this.table.currentClueHasGuessesLeft;
+  }
+
+  get showNewGame(): boolean {
+    return !!this.table?.winner;
+  }
+
   leaveTable(): void {
     this.table.removePlayer(this.state.person);
     this.table.sendUpdate();
@@ -72,6 +95,23 @@ export class TableComponent implements OnInit, OnDestroy {
   logout(): void {
     this.leaveTable();
     this.deviceService.clearPerson();
+  }
+
+  pass(): void {
+    this.table.pass();
+  }
+
+  newGame(): void {
+    this.table.returnToLobby();
+  }
+
+  giveClue(): void {
+    this.dialog.open(GiveClueComponent, {
+      data: <GiveClueData>{
+        table: this.table,
+        myPlayer: this.myPlayer
+      }
+    });
   }
 
   private updateState(state: DeviceState) {

@@ -12,28 +12,116 @@
   border-radius: 5px;
   font-size: 1.5em;
   color: #222;
-}
+  cursor: no-drop;
 
-.card.red {
-  color: $redText;
-  border-color: $redBorder;
-  background-color: $redBackground;
-}
+  // How unselected cards show after the game ends
+  &.gameOver {
+    &.red {
+      color: $redText;
+      border-color: $redBorder;
+      background-color: white;
+    }
 
-.card.blue {
-  color: $blueText;
-  border-color: $blueBorder;
-  background-color: $blueBackground;
-}
+    &.blue {
+      color: $blueText;
+      border-color: $blueBorder;
+      background-color: white;
+    }
 
-.card.yellow {
-  color: $yellowText;
-  border-color: $yellowBorder;
-  background-color: $yellowBackground;
-}
+    &.yellow {
+      color: $yellowText;
+      border-color: $yellowBorder;
+      background-color: white;
+    }
 
-.card.black {
-  color: #222;
-  border-color: #afafaf;
-  background-color: gray;
+    &.black {
+      color: $blackText;
+      border-color: $blackBorder;
+      background-color: white;
+    }
+  }
+
+  // How normal people see things
+  &.revealed {
+    &.red {
+      color: $redText;
+      border-color: $redBorder;
+      background-color: $redBackground;
+    }
+
+    &.blue {
+      color: $blueText;
+      border-color: $blueBorder;
+      background-color: $blueBackground;
+    }
+
+    &.yellow {
+      color: $yellowText;
+      border-color: $yellowBorder;
+      background-color: $yellowBackground;
+    }
+
+    &.black {
+      color: $blackText;
+      border-color: $blackBorder;
+      background-color: $blackBackground;
+    }
+  }
+
+  // How the spymaster sees things
+  &.spymaster {
+    &.red {
+      color: $redText;
+      border-color: $redBorder;
+      background-color: $redBackground;
+    }
+
+    &.blue {
+      color: $blueText;
+      border-color: $blueBorder;
+      background-color: $blueBackground;
+    }
+
+    &.yellow {
+      color: $yellowText;
+      border-color: $yellowBorder;
+      background-color: $yellowBackground;
+    }
+
+    &.black {
+      color: $blackText;
+      border-color: $blackBorder;
+      background-color: $blackBackground;
+    }
+
+    &.revealed {
+      &.red {
+        color: $redText;
+        border-color: $redBorder;
+        background-color: white;
+      }
+
+      &.blue {
+        color: $blueText;
+        border-color: $blueBorder;
+        background-color: white;
+      }
+
+      &.yellow {
+        color: $yellowText;
+        border-color: $yellowBorder;
+        background-color: white;
+      }
+
+      &.black {
+        color: $blackText;
+        border-color: $blackBorder;
+        background-color: white;
+      }
+    }
+  }
+
+  &.pickable {
+    cursor: pointer;
+  }
 }

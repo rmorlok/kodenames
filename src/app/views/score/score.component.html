@@ -1,8 +1,8 @@
-<div id="score">
+<div id="score" *ngIf="table">
     <div *ngIf="table.winner === 'red'" class="winner red">Red Wins!</div>
     <div *ngIf="table.winner === 'blue'" class="winner blue">Blue Wins!</div>
     <div *ngIf="table.winner === null">
-        <span class="red">Red: {{ table.redRemaining}}</span>&nbsp;
-        <span class="blue">Blue: {{ table.blueRemaining}}</span>
+        <span class="red">Red: {{ table.redRemaining}} <span *ngIf="table.turn === 'red'">(turn)</span></span>&nbsp;
+        <span class="blue">Blue: {{ table.blueRemaining}} <span *ngIf="table.turn === 'blue'">(turn)</span></span>
     </div>
 </div>

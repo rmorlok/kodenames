@@ -6,4 +6,5 @@ export interface Clue {
     value: string;
     count: 'unlimited' | number;
     chosenCards: Card[];
+    passed: boolean;
 }
