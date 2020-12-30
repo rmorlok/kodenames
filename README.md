@@ -2,6 +2,8 @@
 
 Angular implementation of online Kodenames board game.  Inspired by the implementation by [ninjabunny](https://github.com/ninjabunny/KodeNames).
 
+Try it out at [https://kodenames.morlok.com](https://kodenames.morlok.com) 🎉
+
 # Local Development
 
 Install dependencies:
@@ -22,9 +24,5 @@ open http://localhost:4300
 
 # Deployment
 
-Note, you need access to AWS resources to run deployment.
-
-## Production
-```
-npm run deploy:production
-```
+Deployment happens automatically via Github Actions. Pull requests generate a preview URL 
+and merging to master deploys the main app.

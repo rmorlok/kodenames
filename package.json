@@ -13,7 +13,7 @@
       "url": "https://github.com/rmorlok"
     }
   ],
-  "homepage": "https://kodenames.morlok.biz",
+  "homepage": "https://kodenames.morlok.com",
   "copyright": "Copyright 2020 Ryan Morlok",
   "license": "MIT",
   "scripts": {
@@ -23,14 +23,7 @@
     "test": "ng test",
     "test-headless": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "gulp": "gulp",
-    "deploy": "gulp deploy",
-    "deploy:staging": "gulp deploy --env staging",
-    "deploy:production": "gulp deploy --env production",
-    "invalidate": "gulp invalidate",
-    "invalidate:staging": "gulp invalidate --env staging",
-    "invalidate:production": "gulp invalidate --env production"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -70,11 +63,6 @@
     "@types/node": "^12.6.0",
     "codelyzer": "^5.2.2",
     "concurrent-transform": "^1.0.0",
-    "gulp": "^4.0.2",
-    "gulp-awspublish": "^4.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-cli": "^2.2.0",
-    "gulp-cloudfront-invalidate": "^0.1.5",
     "ts-node": "^8.8.2",
     "tslint": "^6.1.1",
     "typescript": "~3.8.3",
@@ -91,7 +79,7 @@
     "inquirer-autocomplete-prompt": "^1.0.1"
   },
   "engines": {
-    "node": ">= 12.6.0",
-    "npm": ">= 6.10.0"
+    "node": ">= 14.11.0",
+    "npm": ">= 6.14.0"
   }
 }

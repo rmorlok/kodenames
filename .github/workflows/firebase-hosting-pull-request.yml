@@ -4,7 +4,7 @@
 name: Deploy to Firebase Hosting on PR
 on: [pull_request]
 env:
-  node-version: 13.x
+  node-version: 14.x
 jobs:
   build_and_preview:
     name: Build, Test, and Preview
