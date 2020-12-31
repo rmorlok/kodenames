@@ -77,16 +77,35 @@ export class Table implements TableState {
     const currentClue = this.currentClue;
     if (currentClue) {
       if (currentClue.count === 'unlimited' || currentClue.count === 0) {
-        return !currentClue.passed &&
+        return !this.winner &&
+            !currentClue.done &&
             currentClue.chosenCards.every(card => card.color === currentClue.team);
       } else {
-        return !currentClue.passed &&
-            currentClue.chosenCards.length < currentClue.count &&
+        return !currentClue.done &&
+            currentClue.chosenCards.length < currentClue.count + 1 &&
             currentClue.chosenCards.every(card => card.color === currentClue.team);
       }
     } else {
       return false;
     }
+  }
+
+  canGiveClue(player: Player): boolean {
+    return player &&
+        this.state &&
+        !this.winner &&
+        player.spymaster &&
+        this.turn === player.team &&
+        !this.currentClueHasGuessesLeft;
+  }
+
+  canPass(player: Player): boolean {
+    return player &&
+        this.state &&
+        !this.winner &&
+        !player.spymaster &&
+        this.turn === player.team &&
+        this.currentClueHasGuessesLeft;
   }
 
   get winner(): Team | null {
@@ -156,7 +175,7 @@ export class Table implements TableState {
       return;
     }
 
-    clue.passed = true;
+    clue.done = true;
     this.state.turn = reverseTeam(this.turn);
     this.sendUpdate();
   }

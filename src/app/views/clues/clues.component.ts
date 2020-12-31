@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Table, CARD_COLUMNS, CARD_ROWS, CardColor, Player, Clue } from '@models';
+import { GiveClueComponent, GiveClueData } from '@views/give-clue/give-clue.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'kod-clues',
@@ -13,17 +15,63 @@ export class CluesComponent {
   @Input()
   myPlayer: Player;
 
-  constructor() {}
+  constructor(
+      private dialog: MatDialog
+  ) {}
 
   iconForClue(clue: Clue, isLast: boolean): string {
     if (clue.chosenCards.some(card => card.color !== clue.team)) {
       return 'close';
-    } else if (clue.chosenCards.length === clue.count && clue.chosenCards.every(card => card.color === clue.team)) {
-      return 'check';
-    } else if (!clue.passed && isLast) {
+    } else if (this.table.currentClueHasGuessesLeft && isLast) {
       return 'double_arrow';
+    } else if (clue.chosenCards.length >= clue.count && clue.chosenCards.every(card => card.color === clue.team)) {
+      return 'check';
     } else {
       return 'radio_button_unchecked';
     }
+  }
+
+  cluePassed(clue: Clue): boolean {
+    if (clue.count === 'unlimited' || clue.count === 0) {
+      return false;
+    } else {
+      return clue.done && clue.chosenCards.filter(card => card.color === clue.team).length < clue.count;
+    }
+  }
+
+  get canGiveClue(): boolean {
+    return this.table && this.table.canGiveClue(this.myPlayer);
+  }
+
+  get canPass(): boolean {
+    return this.table && this.table.canPass(this.myPlayer);
+  }
+
+  get passText(): string {
+    if (this.canPass && this.table.currentClue) {
+      const currentClue = this.table.currentClue;
+      if (currentClue.count === 'unlimited' ||
+          currentClue.count === 0 ||
+          currentClue.count <= currentClue.chosenCards.length) {
+        return 'Done';
+      } else {
+        return 'Pass';
+      }
+    } else {
+      return '';
+    }
+  }
+
+  giveClue() {
+    this.dialog.open(GiveClueComponent, {
+      data: <GiveClueData>{
+        table: this.table,
+        myPlayer: this.myPlayer
+      }
+    });
+  }
+
+  pass() {
+    this.table.pass();
   }
 }

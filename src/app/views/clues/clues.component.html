@@ -17,7 +17,23 @@
                   [class.wrongBlack]="card.color !== clue.team && card.color === 'black'">
                 {{ card.word + (i < clue.chosenCards.length - 1 ? ',' : '')}}
             </span>
-            <span *ngIf="clue.passed" class="passed">(passed)</span>
+            <span *ngIf="cluePassed(clue)" class="done">(passed)</span>
         </div>
+    </mat-list-item>
+    <mat-list-item *ngIf="canGiveClue">
+        <button mat-flat-button
+                color="primary"
+                fxFlex
+                (click)="giveClue()">
+            Give Clue
+        </button>
+    </mat-list-item>
+    <mat-list-item *ngIf="canPass">
+        <button mat-flat-button
+                color="primary"
+                fxFlex
+                (click)="pass()">
+            {{ passText }}
+        </button>
     </mat-list-item>
 </mat-list>
