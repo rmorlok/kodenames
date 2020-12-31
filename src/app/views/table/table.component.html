@@ -20,9 +20,9 @@
             <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly center" >
                 <div id="table-id" *ngIf="table">TABLE ID#{{table.id}}</div>
                 <kod-score [table]="table"></kod-score>
-                <button mat-button *ngIf="canGiveClue" (click)="giveClue()">Give Clue</button>
-                <button mat-button *ngIf="canPass" (click)="pass()">Pass</button>
-                <button mat-button *ngIf="showNewGame" (click)="newGame()">New Game</button>
+                <button mat-raised-button color="primary" *ngIf="canGiveClue" (click)="giveClue()">Give Clue</button>
+                <button mat-raised-button color="primary" *ngIf="canPass" (click)="pass()">{{ passText }}</button>
+                <button mat-raised-button color="primary" *ngIf="showNewGame" (click)="newGame()">New Game</button>
             </div>
             <div>
                 <button type="button" aria-label="Toggle sidenav" mat-button (click)="drawer.toggle()" *ngIf="(isHandset$ | async)">

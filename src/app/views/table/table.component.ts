@@ -67,19 +67,11 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   get canGiveClue(): boolean {
-    return this.table &&
-        !this.table.winner &&
-        this.isSpymaster &&
-        this.table.turn === this.myPlayer.team &&
-        !this.table.currentClueHasGuessesLeft;
+    return this.table && this.table.canGiveClue(this.myPlayer);
   }
 
   get canPass(): boolean {
-    return this.table &&
-        !this.table.winner &&
-        !this.isSpymaster &&
-        this.table.turn === this.myPlayer.team &&
-        this.table.currentClueHasGuessesLeft;
+    return this.table && this.table.canPass(this.myPlayer);
   }
 
   get showNewGame(): boolean {
@@ -103,6 +95,21 @@ export class TableComponent implements OnInit, OnDestroy {
 
   newGame(): void {
     this.table.returnToLobby();
+  }
+
+  get passText(): string {
+    if (this.canPass && this.table.currentClue) {
+      const currentClue = this.table.currentClue;
+      if (currentClue.count === 'unlimited' ||
+          currentClue.count === 0 ||
+          currentClue.count <= currentClue.chosenCards.length) {
+        return 'Done';
+      } else {
+        return 'Pass';
+      }
+    } else {
+      return '';
+    }
   }
 
   giveClue(): void {

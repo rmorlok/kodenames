@@ -34,7 +34,7 @@ export class GiveClueComponent {
       value: this.clue,
       count: this.guesses,
       chosenCards: [],
-      passed: false
+      done: false
     });
     this.data.table.sendUpdate();
     this.dialogRef.close();
