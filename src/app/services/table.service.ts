@@ -57,7 +57,7 @@ export class TableService {
 
     createTable(): Observable<Table> {
         return new Observable<Table>(observer => {
-            const tableId = Math.floor(Math.random() * 1000000).toString(10),
+            const tableId = (100000 + Math.floor(Math.random() * 1000000)).toString(10),
                 tableState = <TableState>{
                     id: tableId,
                     players: [],
