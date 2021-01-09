@@ -20,6 +20,13 @@
             <span *ngIf="cluePassed(clue)" class="done">(passed)</span>
         </div>
     </mat-list-item>
+    <mat-list-item *ngIf="waitingForClue">
+        <span class='pending-clue'
+              [class.red]="table.turn === 'red'"
+              [class.blue]="table.turn === 'blue'">
+            Waiting on {{ pendingClueSpymasterName }} to give a clue...
+        </span>
+    </mat-list-item>
     <mat-list-item *ngIf="canGiveClue">
         <button mat-flat-button
                 color="primary"

@@ -17,6 +17,18 @@
   }
 }
 
+.pending-clue {
+  color: #222;
+
+  &.red {
+    color: $redText;
+  }
+
+  &.blue {
+    color: $blueText;
+  }
+}
+
 .mat-line.answers {
   white-space: normal;
 }
