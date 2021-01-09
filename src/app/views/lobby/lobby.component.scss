@@ -2,7 +2,6 @@
 
 #lobby {
   max-width:  90%;
-  width: 600px;
 
   h1 {
     width: 100%;
@@ -33,11 +32,6 @@
   }
 
   .player-list-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     .red {
       color: $redText;
     }
