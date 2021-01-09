@@ -17,36 +17,38 @@
     margin-bottom: 2em;
   }
 
-  #player-list-wrapper {
+  .needed {
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
+
+    &.red {
+      color: $redText;
+    }
+
+    &.blue {
+      color: $blueText;
+    }
+  }
+
+  .player-list-wrapper {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    h3 {
-      text-align: center;
-
-      .red {
-        color: $redText;
-      }
-
-      .blue {
-        color: $blueText;
-      }
+    .red {
+      color: $redText;
     }
-  }
 
-  mat-button-toggle[value="red"] {
-    color: $redText;
-  }
+    .blue {
+      color: $blueText;
+    }
 
-  mat-button-toggle[value="blue"] {
-    color: $blueText;
-  }
-
-  .player {
-    .name {
-      margin-right: 10px;
+    h2 {
+      text-transform: capitalize;
+      text-align: center;
     }
   }
 }
