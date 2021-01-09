@@ -79,6 +79,7 @@
                     <mat-icon matSuffix>exit_to_app</mat-icon>
                 </button>
                 <button
+                        *ngIf="!gameInProgress"
                         mat-flat-button
                         color="primary"
                         [disabled]="!ready"

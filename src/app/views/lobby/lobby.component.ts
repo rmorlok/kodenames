@@ -42,6 +42,10 @@ export class LobbyComponent implements OnInit, OnDestroy {
     return this.table?.validToPlay;
   }
 
+  get gameInProgress(): boolean {
+    return this.table?.started;
+  }
+
   spyMaster(t: Team): Player | null {
     return this.table?.spymasterForTeam(t);
   }
