@@ -62,6 +62,29 @@ export class CluesComponent {
     }
   }
 
+  get waitingForClue(): boolean {
+    return this.table?.waitingOnClue;
+  }
+
+  get pendingClueSpymasterName(): string | null {
+    switch(this.table?.turn) {
+      case 'blue':
+        if (this.myPlayer.person.uuid === this.table.blueSpymaster.person.uuid) {
+          return 'you';
+        } else {
+          return this.table.blueSpymaster.person.name;
+        }
+      case 'red':
+        if (this.myPlayer.person.uuid === this.table.redSpymaster.person.uuid) {
+          return 'you';
+        } else {
+          return this.table.redSpymaster.person.name;
+        }
+      default:
+        return null;
+    }
+  }
+
   giveClue() {
     this.dialog.open(GiveClueComponent, {
       data: <GiveClueData>{

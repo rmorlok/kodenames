@@ -90,6 +90,10 @@ export class Table implements TableState {
     }
   }
 
+  get waitingOnClue(): boolean {
+    return !this.winner && !this.currentClueHasGuessesLeft;
+  }
+
   canGiveClue(player: Player): boolean {
     return player &&
         this.state &&
