@@ -1,39 +1,43 @@
-<div id="pick-table">
-    <mat-card>
-        <mat-card-header>Join or create a table</mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="editForm">
-                <mat-form-field appearance="standard">
-                    <mat-label>Enter table ID</mat-label>
-                    <input matInput formControlName="tableId" placeholder="8675309">
-                    <mat-icon style="color: green" matSuffix *ngIf="this.formTableId.valid">check</mat-icon>
-                    <mat-icon style="color: red" matSuffix *ngIf="this.tableIdValue.length >=6 && !this.formTableId.valid">close</mat-icon>
-                </mat-form-field>
+<div class="single-card-page">
+    <div id="pick-table">
+        <mat-card>
+            <mat-card-content>
+                <h1>Join or Create a Table</h1>
+                <form [formGroup]="editForm" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-around center">
+                    <mat-form-field appearance="standard">
+                        <mat-label>Enter table ID</mat-label>
+                        <input matInput formControlName="tableId" placeholder="8675309">
+                        <mat-icon style="color: green" matSuffix *ngIf="this.formTableId.valid">check</mat-icon>
+                        <mat-icon style="color: red" matSuffix *ngIf="this.tableIdValue.length >=6 && !this.formTableId.valid">close</mat-icon>
+                    </mat-form-field>
+                    <button
+                            mat-flat-button
+                            color="primary"
+                            [disabled]="!editForm.valid"
+                            (click)="join()">
+                        Join table&nbsp;&nbsp;
+                        <mat-icon matSuffix>fast_forward</mat-icon>
+                    </button>
+                </form>
+            </mat-card-content>
+            <mat-card-actions fxLayout="row" fxLayoutGap="20px">
                 <button
                         mat-flat-button
-                        color="primary"
-                        [disabled]="!editForm.valid"
-                        (click)="join()">
-                    Join table&nbsp;&nbsp;
-                    <mat-icon matSuffix>fast_forward</mat-icon>
+                        fxFlex
+                        color="warn"
+                        (click)="logout()">
+                    Logout
+                    <mat-icon matSuffix>close</mat-icon>
                 </button>
-            </form>
-        </mat-card-content>
-        <mat-card-actions>
-            <button
-                    mat-flat-button
-                    color="warn"
-                    (click)="logout()">
-                Logout
-                <mat-icon matSuffix>close</mat-icon>
-            </button>
-            <button
-                    mat-flat-button
-                    color="primary"
-                    (click)="createTable()">
-                Create new table&nbsp;&nbsp;
-                <mat-icon matSuffix>fiber_new</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
+                <button
+                        mat-flat-button
+                        fxFlex
+                        color="primary"
+                        (click)="createTable()">
+                    Create new table&nbsp;&nbsp;
+                    <mat-icon matSuffix>fiber_new</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>
