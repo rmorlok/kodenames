@@ -37,6 +37,10 @@ export class PickTableComponent {
     this.formTableId.setValue(v);
   }
 
+  logout(): void {
+    this.deviceService.clearPerson();
+  }
+
   join(): void {
     if (this.editForm.valid) {
       this.deviceService.setTableId(this.tableIdValue);
