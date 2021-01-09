@@ -2,7 +2,6 @@
 
 #lobby {
   max-width:  90%;
-  width: 600px;
 
   h1 {
     width: 100%;
@@ -17,36 +16,33 @@
     margin-bottom: 2em;
   }
 
-  #player-list-wrapper {
+  .needed {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
 
-    h3 {
-      text-align: center;
+    &.red {
+      color: $redText;
+    }
 
-      .red {
-        color: $redText;
-      }
-
-      .blue {
-        color: $blueText;
-      }
+    &.blue {
+      color: $blueText;
     }
   }
 
-  mat-button-toggle[value="red"] {
-    color: $redText;
-  }
+  .player-list-wrapper {
+    .red {
+      color: $redText;
+    }
 
-  mat-button-toggle[value="blue"] {
-    color: $blueText;
-  }
+    .blue {
+      color: $blueText;
+    }
 
-  .player {
-    .name {
-      margin-right: 10px;
+    h2 {
+      text-transform: capitalize;
+      text-align: center;
     }
   }
 }

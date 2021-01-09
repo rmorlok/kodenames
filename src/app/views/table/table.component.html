@@ -13,6 +13,13 @@
         <mat-toolbar class="primary-toolbar header-wrapper"
                      fxLayout="row">
             <div>
+                <button type="button"
+                        aria-label="Toggle clues"
+                        mat-button
+                        (click)="drawer.toggle()"
+                        *ngIf="(isHandset$ | async)">
+                    <mat-icon aria-label="Toggle clues">menu</mat-icon>
+                </button>
                 <div class="header-logo-img-wrapper" fxFlex>
                     <img class="header-logo-img" src="/assets/img/MorlokTechnologiesIcon.png" />
                 </div>
@@ -25,9 +32,6 @@
                 <button mat-raised-button color="primary" *ngIf="showNewGame" (click)="newGame()">New Game</button>
             </div>
             <div>
-                <button type="button" aria-label="Toggle sidenav" mat-button (click)="drawer.toggle()" *ngIf="(isHandset$ | async)">
-                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-                </button>
                 <button mat-button
                         id="my-profile-button"
                         [matMenuTriggerFor]="menu"
@@ -47,13 +51,17 @@
                 </button>
             </div>
             <mat-menu #menu="matMenu" style="padding-right: 10px;">
+                <button mat-menu-item (click)="endGame()">
+                    <mat-icon>close</mat-icon>
+                    <span>End Game</span>
+                </button>
                 <button mat-menu-item (click)="leaveTable()">
                     <mat-icon>videogame_asset</mat-icon>
-                    <span>Leave table</span>
+                    <span>Leave Table</span>
                 </button>
                 <button mat-menu-item (click)="logout()">
                     <mat-icon>lock</mat-icon>
-                    <span>Log out</span>
+                    <span>Log Out</span>
                 </button>
             </mat-menu>
         </mat-toolbar>

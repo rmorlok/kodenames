@@ -1,23 +1,26 @@
-<div id="new-player">
-    <mat-card>
-        <mat-card-header>Welcome to Kodenames!</mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="editForm">
-                <mat-form-field appearance="standard">
-                    <mat-label>Enter your name</mat-label>
-                    <input matInput formControlName="name" placeholder="Bob Dole">
-                </mat-form-field>
-            </form>
-        </mat-card-content>
-        <mat-card-actions>
-            <button
-                    mat-flat-button
-                    color="primary"
-                    [disabled]="!editForm.valid"
-                    (click)="createPerson()">
-                Next&nbsp;&nbsp;
-                <mat-icon matSuffix>fast_forward</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
+<div class="single-card-page">
+    <div id="new-player">
+        <mat-card>
+            <mat-card-content>
+                <h1>Welcome to Kodenames!</h1>
+                <form [formGroup]="editForm" fxLayout="row">
+                    <mat-form-field appearance="standard" fxFlex>
+                        <mat-label>Enter your name</mat-label>
+                        <input matInput formControlName="name" placeholder="Bob Dole">
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <button
+                        mat-flat-button
+                        fxFlex
+                        color="primary"
+                        [disabled]="!editForm.valid"
+                        (click)="createPerson()">
+                    Next&nbsp;&nbsp;
+                    <mat-icon matSuffix>fast_forward</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>

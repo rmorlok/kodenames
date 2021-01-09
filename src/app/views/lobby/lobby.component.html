@@ -5,68 +5,60 @@
                 <h1>Pick Teams</h1>
 
                 <p id="table-id">Table ID#{{table.id}}</p>
-                <div id="player-list-wrapper">
-                    <div id="player-list" fxLayout="row">
-                        <div fxLayout="column">
-                            <h3 class="red">Red Spymaster</h3>
-                            <ul>
-                                <li *ngIf="spyMaster('red')">
-                                    <span>{{ spyMaster('red').person.name }}</span><ng-container *ngIf="spyMaster('red') === myPlayer">&nbsp; (me)</ng-container>
-                                </li>
-                                <li *ngIf="!spyMaster('red')"><em>No Spymaster</em></li>
-                            </ul>
-                            <h3 class="red">Red Players</h3>
-                            <ul>
-                                <li *ngFor="let player of nonSpymasterPlayers('red')">
-                                    <span>{{ player.person.name }}</span><ng-container *ngIf="player === myPlayer">&nbsp; (me)</ng-container>
-                                </li>
-                                <li *ngIf="nonSpymasterPlayers('red').length === 0"><em>No Players</em></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="blue">Blue Spymaster</h3>
-                            <ul>
-                                <li *ngIf="spyMaster('blue')">
-                                    <span>{{ spyMaster('blue').person.name }}</span><ng-container *ngIf="spyMaster('blue') === myPlayer">&nbsp; (me)</ng-container>
-                                </li>
-                                <li *ngIf="!spyMaster('blue')"><em>No Spymaster</em></li>
-                            </ul>
-                            <h3 class="blue">Blue Players</h3>
-                            <ul>
-                                <li *ngFor="let player of nonSpymasterPlayers('blue')">
+                <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="30px">
+                    <div class="player-list-wrapper" *ngFor="let team of ['red', 'blue']" fxFlex>
+                        <mat-list class="player-list" [class]="team" fxFlex>
+                            <h2>{{ team }} Team</h2>
+                            <mat-list-item *ngFor="let player of sortedPlayers(team)"
+                                           [class]="team" [title]="player.spymaster ? 'spymaster' : 'normal player'">
+
+                                <mat-icon mat-list-icon>{{ player.spymaster ? 'fingerprint' : 'person' }}</mat-icon>
+                                <div mat-line>
                                     <span>{{ player.person.name }}</span>
-                                </li>
-                                <li *ngIf="nonSpymasterPlayers('blue').length === 0"><em>No Players</em></li>
-                            </ul>
-                        </div>
+                                    <span *ngIf="player.person.uuid === myPlayer?.person?.uuid">&nbsp; (me)</span>
+                                    <span *ngIf="player.person.uuid !== myPlayer?.person?.uuid && player.spymaster" class="spymaster">&nbsp; (spymaster)</span>
+                                </div>
+                                <button
+                                        mat-icon-button
+                                        class="remove-menu"
+                                        *ngIf="myPlayer?.person?.uuid !== player.person.uuid"
+                                        [matMenuTriggerFor]="menu"
+                                        aria-label="Remove player">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item (click)="remove(player)">
+                                        <mat-icon>person_off</mat-icon>
+                                        <span>Remove</span>
+                                    </button>
+                                </mat-menu>
+                            </mat-list-item>
+                            <button mat-list-item
+                                    *ngIf="!myPlayer || myPlayer.team !== team"
+                                    (click)="setTeam(team)"
+                                    style="text-transform: capitalize">
+                                <mat-icon>person_add</mat-icon>&nbsp;&nbsp;Play {{ team }}
+                            </button>
+                            <button
+                                    mat-list-item
+                                    color="warn"
+                                    *ngIf="myPlayer && !myPlayer.spymaster && myPlayer.team === team"
+                                    (click)="makeSpymaster()">
+                                <mat-icon>fingerprint</mat-icon>&nbsp;&nbsp;I'm the spymaster
+                            </button>
+                        </mat-list>
                     </div>
                 </div>
-                <div fxLayout="row">
-                    <mat-label>My team:</mat-label>
-                    <mat-button-toggle-group name="team" aria-label="Font Style" [value]="myPlayer?.team"
-                                             (change)="setTeam($event)">
-                        <mat-button-toggle value="red">Red Team
-                            <mat-icon *ngIf="myPlayer?.team === 'red'">check</mat-icon>
-                        </mat-button-toggle>
-                        <mat-button-toggle value="blue">Blue Team
-                            <mat-icon *ngIf="myPlayer?.team === 'blue'">check</mat-icon>
-                        </mat-button-toggle>
-                    </mat-button-toggle-group>
-                </div>
-                <div fxLayout="row">
-                    <button
-                            mat-stroked-button
-                            color="warn"
-                            *ngIf="myPlayer && !myPlayer.spymaster"
-                            (click)="makeSpymaster()">
-                        I'm the spymaster
-                    </button>
-                </div>
+                <p class="needed red" *ngIf="!spyMaster('red')">Red needs a spymaster</p>
+                <p class="needed blue" *ngIf="!spyMaster('blue')">Blue needs a spymaster</p>
+                <p class="needed red" *ngIf="spyMaster('red') && nonSpymasterPlayers('red').length < 1">Red needs more players</p>
+                <p class="needed blue" *ngIf="spyMaster('blue') && nonSpymasterPlayers('blue').length < 1">Blue needs more players</p>
             </mat-card-content>
-            <mat-card-actions>
+            <mat-card-actions fxLayout="row" fxLayoutGap="20px">
                 <button
                         mat-flat-button
                         color="warn"
+                        fxFlex
                         (click)="logout()">
                     Logout
                     <mat-icon matSuffix>close</mat-icon>
@@ -74,6 +66,7 @@
                 <button
                         mat-flat-button
                         color="primary"
+                        fxFlex
                         (click)="leave()">
                     Leave Table
                     <mat-icon matSuffix>exit_to_app</mat-icon>
@@ -82,6 +75,7 @@
                         *ngIf="!gameInProgress"
                         mat-flat-button
                         color="primary"
+                        fxFlex
                         [disabled]="!ready"
                         (click)="startGame()">
                     Start Game

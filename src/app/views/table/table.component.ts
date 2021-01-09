@@ -78,6 +78,11 @@ export class TableComponent implements OnInit, OnDestroy {
     return !!this.table?.winner;
   }
 
+  endGame(): void {
+    this.table.started = false;
+    this.table.sendUpdate();
+  }
+
   leaveTable(): void {
     this.table.removePlayer(this.state.person);
     this.table.sendUpdate();

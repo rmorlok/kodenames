@@ -46,6 +46,18 @@ export class LobbyComponent implements OnInit, OnDestroy {
     return this.table?.started;
   }
 
+  sortedPlayers(t: Team): Player[] {
+    return this.table.playersForTeam(t).sort((p1, p2) => {
+      if(p1.spymaster) {
+        return -999;
+      } else if (p2.spymaster) {
+        return 999;
+      } else {
+        return p1.person.name.localeCompare(p2.person.name);
+      }
+    });
+  }
+
   spyMaster(t: Team): Player | null {
     return this.table?.spymasterForTeam(t);
   }
@@ -67,7 +79,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     this.table.sendUpdate();
   }
 
-  setTeam($event: {value: Team}): void {
+  setTeam(team: Team): void {
     if (!this.table || !this.state?.person) {
       return;
     }
@@ -77,15 +89,24 @@ export class LobbyComponent implements OnInit, OnDestroy {
     if (!p) {
       p = <Player>{
         person: this.state.person,
-        team: $event.value,
+        team: team,
         spymaster: false
       };
       this.table.players.push(p);
     } else {
-      p.team = $event.value;
+      p.team = team;
       p.spymaster = false;
     }
 
+    this.table.sendUpdate();
+  }
+
+  remove(player: Player): void {
+    if (this.myPlayer?.person?.uuid === player.person.uuid) {
+      this.deviceService.clearTableId();
+    }
+
+    this.table.removePlayer(player.person);
     this.table.sendUpdate();
   }
 
