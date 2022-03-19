@@ -1,7 +1,7 @@
 import { Player } from './player';
 import { Clue } from './clue';
 import { Card, CardColor } from './card';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import Words from '../../assets/data/words.json';
 import { Person } from './person';
