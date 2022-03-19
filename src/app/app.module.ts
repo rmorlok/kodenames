@@ -18,11 +18,12 @@ import { AppComponent } from './app.component';
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 import { LayoutComponent } from './layout/layout.component';
-import { AngularFireModule } from '@angular/fire';
 import { environment } from '@environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
 import { ViewsModule } from '@views/views.module';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
 @NgModule({
   imports: [
@@ -39,7 +40,7 @@ import { ViewsModule } from '@views/views.module';
     DragDropModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    ViewsModule
+    ViewsModule,
   ],
   declarations: [
     AppComponent,

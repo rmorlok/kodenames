@@ -1,4 +1,4 @@
-# Kodenames
+    # Kodenames
 
 Angular implementation of online Kodenames board game.  Inspired by the implementation by [ninjabunny](https://github.com/ninjabunny/KodeNames).
 
