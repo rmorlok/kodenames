@@ -8,7 +8,9 @@
                 <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="30px">
                     <div class="player-list-wrapper" *ngFor="let team of ['red', 'blue']" fxFlex>
                         <mat-list class="player-list" [class]="team" fxFlex>
-                            <h2>{{ team }} Team</h2>
+                            <h2 class="team-title"
+                                [class.red]="team === 'red'"
+                                [class.blue]="team === 'blue'">{{ team }} Team</h2>
                             <mat-list-item *ngFor="let player of sortedPlayers(team)"
                                            [class]="team" [title]="player.spymaster ? 'spymaster' : 'normal player'">
 
@@ -41,7 +43,6 @@
                             </button>
                             <button
                                     mat-list-item
-                                    color="warn"
                                     *ngIf="myPlayer && !myPlayer.spymaster && myPlayer.team === team"
                                     (click)="makeSpymaster()">
                                 <mat-icon>fingerprint</mat-icon>&nbsp;&nbsp;I'm the spymaster
@@ -49,10 +50,10 @@
                         </mat-list>
                     </div>
                 </div>
-                <p class="needed red" *ngIf="!spyMaster('red')">Red needs a spymaster</p>
-                <p class="needed blue" *ngIf="!spyMaster('blue')">Blue needs a spymaster</p>
-                <p class="needed red" *ngIf="spyMaster('red') && nonSpymasterPlayers('red').length < 1">Red needs more players</p>
-                <p class="needed blue" *ngIf="spyMaster('blue') && nonSpymasterPlayers('blue').length < 1">Blue needs more players</p>
+                <p class="needed red text" *ngIf="!spyMaster('red')">Red needs a spymaster</p>
+                <p class="needed blue text" *ngIf="!spyMaster('blue')">Blue needs a spymaster</p>
+                <p class="needed red text" *ngIf="spyMaster('red') && nonSpymasterPlayers('red').length < 1">Red needs more players</p>
+                <p class="needed blue text" *ngIf="spyMaster('blue') && nonSpymasterPlayers('blue').length < 1">Blue needs more players</p>
             </mat-card-content>
             <mat-card-actions fxLayout="row" fxLayoutGap="20px">
                 <button

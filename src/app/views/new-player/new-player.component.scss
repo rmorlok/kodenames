@@ -1,3 +1,17 @@
+@import "../../../scss/colors";
+
+@media (prefers-color-scheme: light) {
+  .single-card-page {
+    background-color: $fullPageBackgroundLight;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .single-card-page {
+    background-color: $fullPageBackgroundDark;
+  }
+}
+
 #new-player {
   padding: 10px;
 }

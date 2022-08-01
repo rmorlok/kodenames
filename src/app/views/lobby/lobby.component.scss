@@ -1,5 +1,37 @@
 @import "../../../scss/colors";
 
+@media (prefers-color-scheme: light) {
+  h2.team-title.red, .needed.red.text {
+    color: red;
+  }
+
+  h2.team-title.blue, .needed.blue.text {
+    color: blue;
+  }
+
+  .single-card-page {
+    background-color: $fullPageBackgroundLight;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  h2.team-title.red, .needed.red.text {
+    color: #ff7272;
+  }
+
+  h2.team-title.blue, .needed.blue.text {
+    color: #7b7bff;
+  }
+
+  button.mat-list-item {
+    background-color: #4b4545;
+  }
+
+  .single-card-page {
+    background-color: $fullPageBackgroundDark;
+  }
+}
+
 #lobby {
   max-width:  90%;
 
@@ -21,25 +53,9 @@
     margin-bottom: 0;
     text-align: center;
     font-weight: bold;
-
-    &.red {
-      color: $redText;
-    }
-
-    &.blue {
-      color: $blueText;
-    }
   }
 
   .player-list-wrapper {
-    .red {
-      color: $redText;
-    }
-
-    .blue {
-      color: $blueText;
-    }
-
     h2 {
       text-transform: capitalize;
       text-align: center;

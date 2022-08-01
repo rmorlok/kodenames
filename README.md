@@ -4,6 +4,8 @@ Angular implementation of online Kodenames board game.  Inspired by the implemen
 
 Try it out at [https://kodenames.morlok.com](https://kodenames.morlok.com) 🎉
 
+![screenshot](images/screenshot.jpg)
+
 # Local Development
 
 Install dependencies:

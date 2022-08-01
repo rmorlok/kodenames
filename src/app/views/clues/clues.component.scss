@@ -1,32 +1,105 @@
 @import '../../../scss/colors';
 
+@media (prefers-color-scheme: light) {
+  .clue {
+    color: #222;
+
+    &.red {
+      color: #790242;
+    }
+
+    &.blue {
+      color: darkblue;
+    }
+  }
+
+  .pending-clue {
+    color: #222;
+
+    &.red {
+      color: #790242;
+    }
+
+    &.blue {
+      color: darkblue;
+    }
+  }
+
+  .answer {
+    &.green {
+      color: darkgreen;
+    }
+
+    &.wrongBlue {
+      color: darkblue;
+    }
+
+    &.wrongRed {
+      color: #790242;
+    }
+
+    &.wrongYellow {
+      color: darkgoldenrod;
+    }
+
+    &.wrongBlack {
+      color: black;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .clue {
+    color: #222;
+
+    &.red {
+      color: #ff7272;
+    }
+
+    &.blue {
+      color: #7b7bff;
+    }
+  }
+
+  .pending-clue {
+    color: #222;
+
+    &.red {
+      color: #ff7272;
+    }
+
+    &.blue {
+      color: #7b7bff;
+    }
+  }
+
+  .answer {
+    &.green {
+      color: #70d370;
+    }
+
+    &.wrongBlue {
+      color: #7b7bff;
+    }
+
+    &.wrongRed {
+      color: #ff7272;
+    }
+
+    &.wrongYellow {
+      color: darkgoldenrod;
+    }
+
+    &.wrongBlack {
+      color: black;
+      text-shadow: white 0 0 3px;
+    }
+  }
+}
+
 #cards-wrapper {
   padding: 10px;
   height: 100%;
-}
-
-.clue {
-  color: #222;
-
-  &.red {
-    color: $redText;
-  }
-
-  &.blue {
-    color: $blueText;
-  }
-}
-
-.pending-clue {
-  color: #222;
-
-  &.red {
-    color: $redText;
-  }
-
-  &.blue {
-    color: $blueText;
-  }
 }
 
 .mat-line.answers {
@@ -37,29 +110,24 @@
   font-style: italic;
 
   &.green {
-    color: $greenText;
   }
 
   &.wrongBlue {
-    color: $blueText;
     font-style: normal;
     font-weight: bold;
   }
 
   &.wrongRed {
-    color: $redText;
     font-style: normal;
     font-weight: bold;
   }
 
   &.wrongYellow {
-    color: $yellowText;
     font-style: normal;
     font-weight: bold;
   }
 
   &.wrongBlack {
-    color: black;
     font-style: normal;
     font-weight: bold;
   }

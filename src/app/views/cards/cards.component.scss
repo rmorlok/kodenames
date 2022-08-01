@@ -10,12 +10,10 @@ $gameOverUnrevealedOpacity: 0.45;
 $spymasterRevealedOpacity: 0.1;
 
 .card {
-  background-color: white;
   text-transform: uppercase;
   border: 1px solid #afafaf;
   border-radius: 5px;
   font-size: 1.5em;
-  color: #222;
   cursor: no-drop;
   word-break: break-word;
   text-align: center;
@@ -23,143 +21,315 @@ $spymasterRevealedOpacity: 0.1;
   // How unselected cards show after the game ends
   &.gameOver {
     &.red {
-      color: $redText;
-      border-color: $redBorder;
-      background-color: $redBackground;
       opacity: $gameOverUnrevealedOpacity;
     }
 
     &.blue {
-      color: $blueText;
-      border-color: $blueBorder;
-      background-color: $blueBackground;
       opacity: $gameOverUnrevealedOpacity;
     }
 
     &.yellow {
-      color: $yellowText;
-      border-color: $yellowBorder;
-      background-color: $yellowBackground;
       opacity: $gameOverUnrevealedOpacity;
     }
 
     &.black {
-      color: $blackText;
-      border-color: $blackBorder;
-      background-color: $blackBackground;
       opacity: $gameOverUnrevealedOpacity;
     }
 
     &.red.revealed {
-      color: $redText;
-      border-color: $redBorder;
-      background-color: $redBackground;
       opacity: $gameOverRevealedOpacity;
     }
 
     &.blue.revealed {
-      color: $blueText;
-      border-color: $blueBorder;
-      background-color: $blueBackground;
       opacity: $gameOverRevealedOpacity;
     }
 
     &.yellow.revealed {
-      color: $yellowText;
-      border-color: $yellowBorder;
-      background-color: $yellowBackground;
       opacity: $gameOverRevealedOpacity;
     }
 
     &.black.revealed {
-      color: $blackText;
-      border-color: $blackBorder;
-      background-color: $blackBackground;
       opacity: $gameOverRevealedOpacity;
-    }
-  }
-
-  // How normal people see things
-  &.revealed {
-    &.red {
-      color: $redText;
-      border-color: $redBorder;
-      background-color: $redBackground;
-    }
-
-    &.blue {
-      color: $blueText;
-      border-color: $blueBorder;
-      background-color: $blueBackground;
-    }
-
-    &.yellow {
-      color: $yellowText;
-      border-color: $yellowBorder;
-      background-color: $yellowBackground;
-    }
-
-    &.black {
-      color: $blackText;
-      border-color: $blackBorder;
-      background-color: $blackBackground;
-    }
-  }
-
-  // How the spymaster sees things
-  &.spymaster {
-    &.red {
-      color: $redText;
-      border-color: $redBorder;
-      background-color: $redBackground;
-    }
-
-    &.blue {
-      color: $blueText;
-      border-color: $blueBorder;
-      background-color: $blueBackground;
-    }
-
-    &.yellow {
-      color: $yellowText;
-      border-color: $yellowBorder;
-      background-color: $yellowBackground;
-    }
-
-    &.black {
-      color: $blackText;
-      border-color: $blackBorder;
-      background-color: $blackBackground;
-    }
-
-    &.revealed {
-      &.red {
-        color: $redText;
-        border-color: rgba($redBorder, $spymasterRevealedOpacity);
-        background-color: rgba($redBackground, $spymasterRevealedOpacity);
-      }
-
-      &.blue {
-        color: $blueText;
-        border-color: rgba($blueBorder, $spymasterRevealedOpacity);
-        background-color: rgba($blueBackground, $spymasterRevealedOpacity);
-      }
-
-      &.yellow {
-        color: $yellowText;
-        border-color: rgba($yellowBorder, $spymasterRevealedOpacity);
-        background-color: rgba($yellowBackground, $spymasterRevealedOpacity);
-      }
-
-      &.black {
-        color: $blackText;
-        border-color: rgba($blackBorder, $spymasterRevealedOpacity);
-        background-color: rgba($blackBackground, $spymasterRevealedOpacity);
-      }
     }
   }
 
   &.pickable {
     cursor: pointer;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .card {
+    color: #222;
+    background-color: white;
+
+    // How unselected cards show after the game ends
+    &.gameOver {
+      &.red {
+        color: $redTextLight;
+        border-color: $redBorderLight;
+        background-color: $redBackgroundLight;
+      }
+
+      &.blue {
+        color: $blueTextLight;
+        border-color: $blueBorderLight;
+        background-color: $blueBackgroundLight;
+      }
+
+      &.yellow {
+        color: $yellowTextLight;
+        border-color: $yellowBorderLight;
+        background-color: $yellowBackgroundLight;
+      }
+
+      &.black {
+        color: $blackTextLight;
+        border-color: $blackBorderLight;
+        background-color: $blackBackgroundLight;
+      }
+
+      &.red.revealed {
+        color: $redTextLight;
+        border-color: $redBorderLight;
+        background-color: $redBackgroundLight;
+      }
+
+      &.blue.revealed {
+        color: $blueTextLight;
+        border-color: $blueBorderLight;
+        background-color: $blueBackgroundLight;
+      }
+
+      &.yellow.revealed {
+        color: $yellowTextLight;
+        border-color: $yellowBorderLight;
+        background-color: $yellowBackgroundLight;
+      }
+
+      &.black.revealed {
+        color: $blackTextLight;
+        border-color: $blackBorderLight;
+        background-color: $blackBackgroundLight;
+      }
+    }
+
+    // How normal people see things
+    &.revealed {
+      &.red {
+        color: $redTextLight;
+        border-color: $redBorderLight;
+        background-color: $redBackgroundLight;
+      }
+
+      &.blue {
+        color: $blueTextLight;
+        border-color: $blueBorderLight;
+        background-color: $blueBackgroundLight;
+      }
+
+      &.yellow {
+        color: $yellowTextLight;
+        border-color: $yellowBorderLight;
+        background-color: $yellowBackgroundLight;
+      }
+
+      &.black {
+        color: $blackTextLight;
+        border-color: $blackBorderLight;
+        background-color: $blackBackgroundLight;
+      }
+    }
+
+    // How the spymaster sees things
+    &.spymaster {
+      &.red {
+        color: $redTextLight;
+        border-color: $redBorderLight;
+        background-color: $redBackgroundLight;
+      }
+
+      &.blue {
+        color: $blueTextLight;
+        border-color: $blueBorderLight;
+        background-color: $blueBackgroundLight;
+      }
+
+      &.yellow {
+        color: $yellowTextLight;
+        border-color: $yellowBorderLight;
+        background-color: $yellowBackgroundLight;
+      }
+
+      &.black {
+        color: $blackTextLight;
+        border-color: $blackBorderLight;
+        background-color: $blackBackgroundLight;
+      }
+
+      &.revealed {
+        &.red {
+          color: $redTextLight;
+          border-color: rgba($redBorderLight, $spymasterRevealedOpacity);
+          background-color: rgba($redBackgroundLight, $spymasterRevealedOpacity);
+        }
+
+        &.blue {
+          color: $blueTextLight;
+          border-color: rgba($blueBorderLight, $spymasterRevealedOpacity);
+          background-color: rgba($blueBackgroundLight, $spymasterRevealedOpacity);
+        }
+
+        &.yellow {
+          color: $yellowTextLight;
+          border-color: rgba($yellowBorderLight, $spymasterRevealedOpacity);
+          background-color: rgba($yellowBackgroundLight, $spymasterRevealedOpacity);
+        }
+
+        &.black {
+          color: $blackTextLight;
+          border-color: rgba($blackBorderLight, $spymasterRevealedOpacity);
+          background-color: rgba($blackBackgroundLight, $spymasterRevealedOpacity);
+        }
+      }
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    color: #494949;
+    background-color: black;
+
+    // How unselected cards show after the game ends
+    &.gameOver {
+      &.red {
+        color: $redTextDark;
+        border-color: $redBorderDark;
+        background-color: $redBackgroundDark;
+      }
+
+      &.blue {
+        color: $blueTextDark;
+        border-color: $blueBorderDark;
+        background-color: $blueBackgroundDark;
+      }
+
+      &.yellow {
+        color: $yellowTextDark;
+        border-color: $yellowBorderDark;
+        background-color: $yellowBackgroundDark;
+      }
+
+      &.black {
+        color: $blackTextDark;
+        border-color: $blackBorderDark;
+        background-color: $blackBackgroundDark;
+      }
+
+      &.red.revealed {
+        color: $redTextDark;
+        border-color: $redBorderDark;
+        background-color: $redBackgroundDark;
+      }
+
+      &.blue.revealed {
+        color: $blueTextDark;
+        border-color: $blueBorderDark;
+        background-color: $blueBackgroundDark;
+      }
+
+      &.yellow.revealed {
+        color: $yellowTextDark;
+        border-color: $yellowBorderDark;
+        background-color: $yellowBackgroundDark;
+      }
+
+      &.black.revealed {
+        color: $blackTextDark;
+        border-color: $blackBorderDark;
+        background-color: $blackBackgroundDark;
+      }
+    }
+
+    // How normal people see things
+    &.revealed {
+      &.red {
+        color: $redTextDark;
+        border-color: $redBorderDark;
+        background-color: $redBackgroundDark;
+      }
+
+      &.blue {
+        color: $blueTextDark;
+        border-color: $blueBorderDark;
+        background-color: $blueBackgroundDark;
+      }
+
+      &.yellow {
+        color: $yellowTextDark;
+        border-color: $yellowBorderDark;
+        background-color: $yellowBackgroundDark;
+      }
+
+      &.black {
+        color: $blackTextDark;
+        border-color: $blackBorderDark;
+        background-color: $blackBackgroundDark;
+      }
+    }
+
+    // How the spymaster sees things
+    &.spymaster {
+      &.red {
+        color: $redTextDark;
+        border-color: $redBorderDark;
+        background-color: $redBackgroundDark;
+      }
+
+      &.blue {
+        color: $blueTextDark;
+        border-color: $blueBorderDark;
+        background-color: $blueBackgroundDark;
+      }
+
+      &.yellow {
+        color: $yellowTextDark;
+        border-color: $yellowBorderDark;
+        background-color: $yellowBackgroundDark;
+      }
+
+      &.black {
+        color: $blackTextDark;
+        border-color: $blackBorderDark;
+        background-color: $blackBackgroundDark;
+      }
+
+      &.revealed {
+        &.red {
+          color: $redTextDark;
+          border-color: rgba($redBorderDark, $spymasterRevealedOpacity);
+          background-color: rgba($redBackgroundDark, $spymasterRevealedOpacity);
+        }
+
+        &.blue {
+          color: $blueTextDark;
+          border-color: rgba($blueBorderDark, $spymasterRevealedOpacity);
+          background-color: rgba($blueBackgroundDark, $spymasterRevealedOpacity);
+        }
+
+        &.yellow {
+          color: $yellowTextDark;
+          border-color: rgba($yellowBorderDark, $spymasterRevealedOpacity);
+          background-color: rgba($yellowBackgroundDark, $spymasterRevealedOpacity);
+        }
+
+        &.black {
+          color: $blackTextDark;
+          border-color: rgba($blackBorderDark, $spymasterRevealedOpacity);
+          background-color: rgba($blackBackgroundDark, $spymasterRevealedOpacity);
+        }
+      }
+    }
   }
 }
