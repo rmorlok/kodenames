@@ -1,19 +1,45 @@
-$redText: #790242;
-$redBorder: #790242;
-$redBackground: lightpink;
+// Light
+$redTextLight: #790242;
+$redBorderLight: #790242;
+$redBackgroundLight: lightpink;
 
-$blueText: darkblue;
-$blueBorder: darkblue;
-$blueBackground: lightblue;
+$blueTextLight: darkblue;
+$blueBorderLight: darkblue;
+$blueBackgroundLight: lightblue;
 
-$yellowText: darkgoldenrod;
-$yellowBorder: darkgoldenrod;
-$yellowBackground: lightgoldenrodyellow;
+$yellowTextLight: darkgoldenrod;
+$yellowBorderLight: darkgoldenrod;
+$yellowBackgroundLight: lightgoldenrodyellow;
 
-$greenText: darkgreen;
-$greenBorder: darkgreen;
-$greenBackground: lightgreen;
+$greenTextLight: darkgreen;
+$greenBorderLight: darkgreen;
+$greenBackgroundLight: lightgreen;
 
-$blackText: #222;
-$blackBorder: #afafaf;
-$blackBackground: gray;
+$blackTextLight: #222;
+$blackBorderLight: #afafaf;
+$blackBackgroundLight: gray;
+
+$fullPageBackgroundLight: #F0F0F0;
+
+// Dark
+$redTextDark: #e3c6c6;
+$redBorderDark: #e3c6c6;
+$redBackgroundDark: #ac7e85;
+
+$blueTextDark: #98c0ec;
+$blueBorderDark: #98c0ec;
+$blueBackgroundDark: #5497ac;
+
+$yellowTextDark: darkgoldenrod;
+$yellowBorderDark: darkgoldenrod;
+$yellowBackgroundDark: lightgoldenrodyellow;
+
+$greenTextDark: #70d370;
+$greenBorderDark: #70d370;
+$greenBackgroundDark: lightgreen;
+
+$blackTextDark: black;
+$blackBorderDark: black;
+$blackBackgroundDark: gray;
+
+$fullPageBackgroundDark: black;

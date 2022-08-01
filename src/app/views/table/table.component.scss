@@ -105,16 +105,34 @@ mat-nav-list a {
   min-width: 100%;
 }
 
-.personButton {
-  padding: 5px;
+@media (prefers-color-scheme: light) {
+  .personButton {
+    padding: 5px;
 
-  &.red {
-    color: $redText;
-    background-color: $redBackground;
+    &.red {
+      color: $redTextLight;
+      background-color: $redBackgroundLight;
+    }
+
+    &.blue {
+      color: $blueTextLight;
+      background-color: $blueBackgroundLight;
+    }
   }
+}
 
-  &.blue {
-    color: $blueText;
-    background-color: $blueBackground;
+@media (prefers-color-scheme: dark) {
+  .personButton {
+    padding: 5px;
+
+    &.red {
+      color: $redTextDark;
+      background-color: $redBackgroundDark;
+    }
+
+    &.blue {
+      color: $blueTextDark;
+      background-color: $blueBackgroundDark;
+    }
   }
 }

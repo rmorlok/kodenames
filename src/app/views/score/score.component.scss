@@ -1,9 +1,21 @@
-@import '../../../scss/colors';
 
-.red {
-  color: $redText;
+@media (prefers-color-scheme: light) {
+  .red {
+    color: #790242;
+  }
+
+  .blue {
+    color: darkblue;
+  }
 }
 
-.blue {
-  color: $blueText;
+@media (prefers-color-scheme: dark) {
+  .red {
+    color: #ff7272;
+  }
+
+  .blue {
+    color: #7b7bff;
+  }
 }
+
