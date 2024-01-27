@@ -1,32 +1,30 @@
+// Imports for Angular Material Theming
+@use '@angular/material' as mat;
+
 @import "normalize.css";
 
 // If you want to override variables do it here
 @import "variables";
 
-// Import styles
-// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-// Imports for Angular Material Theming
-@import '~@angular/material/theming';
-@include mat-core();
+@include mat.core();
 
 // Light theme
-$light-primary: mat-palette($mat-indigo);
-$light-accent:  mat-palette($mat-pink, A200, A100, A400);
-$light-theme:   mat-light-theme($light-primary, $light-accent);
+$light-primary: mat.define-palette(mat.$indigo-palette, 500);
+$light-accent:  mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$light-theme:   mat.define-light-theme($light-primary, $light-accent);
 
 // Dark theme
-$dark-primary: mat-palette($mat-blue-grey);
-$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
-$dark-warn:    mat-palette($mat-deep-orange);
-$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-primary: mat.define-palette(mat.$blue-grey-palette);
+$dark-accent:  mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$dark-warn:    mat.define-palette(mat.$deep-orange-palette);
+$dark-theme:   mat.define-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 @media (prefers-color-scheme: light) {
-  @include angular-material-theme($light-theme);
+  @include mat.core-theme($light-theme);
 }
 
 @media (prefers-color-scheme: dark) {
-  @include angular-material-theme($dark-theme);
+  @include mat.core-theme($dark-theme);
 }
 
 

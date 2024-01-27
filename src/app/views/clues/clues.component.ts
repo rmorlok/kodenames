@@ -24,7 +24,7 @@ export class CluesComponent {
       return 'close';
     } else if (this.table.currentClueHasGuessesLeft && isLast) {
       return 'double_arrow';
-    } else if (clue.chosenCards.length >= clue.count && clue.chosenCards.every(card => card.color === clue.team)) {
+    } else if (clue.count != 'unlimited' && clue.chosenCards.length >= clue.count && clue.chosenCards.every(card => card.color === clue.team)) {
       return 'check';
     } else {
       return 'radio_button_unchecked';

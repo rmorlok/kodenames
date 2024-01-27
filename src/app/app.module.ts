@@ -46,8 +46,6 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
     AppComponent,
     LayoutComponent
   ],
-  entryComponents: [
-  ],
   providers: [
     {
       provide: LocationStrategy,
