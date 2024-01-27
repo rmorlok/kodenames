@@ -32,9 +32,6 @@ const components = [
         FormsModule,
         ReactiveFormsModule
     ],
-    entryComponents: [
-        GiveClueComponent
-    ],
     exports: components,
 })
 export class ViewsModule {
