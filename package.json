@@ -62,7 +62,7 @@
     "@types/deep-equal": "^1.0.1",
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^17.0.21",
-    "codelyzer": "^0.0.28",
+    "codelyzer": "^6.0.2",
     "concurrent-transform": "^1.0.0",
     "firebase-tools": "^13.1.0",
     "fuzzy": "^0.1.3",
