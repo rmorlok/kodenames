@@ -3,13 +3,19 @@
 @media (prefers-color-scheme: light) {
   .clue {
     color: #222;
+    --mdc-list-list-item-label-text-color: #222;
+    --mdc-list-list-item-leading-icon-color: #222;
 
     &.red {
       color: #790242;
+      --mdc-list-list-item-label-text-color: #790242;
+      --mdc-list-list-item-leading-icon-color: #790242;
     }
 
     &.blue {
       color: darkblue;
+      --mdc-list-list-item-label-text-color: darkblue;
+      --mdc-list-list-item-leading-icon-color: darkblue;
     }
   }
 

@@ -14,7 +14,7 @@
                             <mat-list-item *ngFor="let player of sortedPlayers(team)"
                                            [class]="team" [title]="player.spymaster ? 'spymaster' : 'normal player'">
 
-                                <mat-icon mat-list-icon>{{ player.spymaster ? 'fingerprint' : 'person' }}</mat-icon>
+                                <mat-icon matListItemIcon>{{ player.spymaster ? 'fingerprint' : 'person' }}</mat-icon>
                                 <div mat-line>
                                     <span>{{ player.person.name }}</span>
                                     <span *ngIf="player.person.uuid === myPlayer?.person?.uuid">&nbsp; (me)</span>
@@ -25,7 +25,8 @@
                                         class="remove-menu"
                                         *ngIf="myPlayer?.person?.uuid !== player.person.uuid"
                                         [matMenuTriggerFor]="menu"
-                                        aria-label="Remove player">
+                                        aria-label="Remove player"
+                                        matListItemMeta>
                                     <mat-icon>more_vert</mat-icon>
                                 </button>
                                 <mat-menu #menu="matMenu">
