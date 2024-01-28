@@ -107,7 +107,12 @@ mat-nav-list a {
 
 @media (prefers-color-scheme: light) {
   .personButton {
+    height: 44px;
     padding: 5px;
+
+    .name {
+      padding-top: 4px;
+    }
 
     &.red {
       color: $redTextLight;

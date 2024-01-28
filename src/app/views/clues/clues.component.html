@@ -5,7 +5,7 @@
                    class="clue"
                    [class.red]="clue.team === 'red'"
                    [class.blue]="clue.team === 'blue'">
-        <mat-icon mat-list-icon>{{ iconForClue(clue, i === table.clues.length - 1) }}</mat-icon>
+        <mat-icon matListItemIcon>{{ iconForClue(clue, i === table.clues.length - 1) }}</mat-icon>
         <div mat-line>{{ clue.value }} &mdash; {{ clue.count }}</div>
         <div mat-line class="answers">
             <span *ngFor="let card of clue.chosenCards; index as i"
