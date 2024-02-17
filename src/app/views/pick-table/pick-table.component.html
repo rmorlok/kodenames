@@ -1,10 +1,10 @@
 <div class="single-card-page">
     <div id="pick-table">
-        <mat-card>
+        <mat-card appearance="outlined">
             <mat-card-content>
                 <h1>Join or Create a Table</h1>
                 <form [formGroup]="editForm" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-around center">
-                    <mat-form-field appearance="standard">
+                    <mat-form-field>
                         <mat-label>Enter table ID</mat-label>
                         <input matInput formControlName="tableId" placeholder="8675309">
                         <mat-icon style="color: green" matSuffix *ngIf="this.formTableId.valid">check</mat-icon>

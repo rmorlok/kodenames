@@ -1,10 +1,10 @@
 <div class="single-card-page">
     <div id="new-player">
-        <mat-card>
+        <mat-card appearance="outlined">
             <mat-card-content>
                 <h1>Welcome to Kodenames!</h1>
                 <form [formGroup]="editForm" fxLayout="row">
-                    <mat-form-field appearance="standard" fxFlex>
+                    <mat-form-field fxFlex>
                         <mat-label>Enter your name</mat-label>
                         <input matInput formControlName="name" placeholder="Bob Dole">
                     </mat-form-field>
