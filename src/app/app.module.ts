@@ -23,7 +23,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
 import { ViewsModule } from '@views/views.module';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
 @NgModule({
   imports: [
