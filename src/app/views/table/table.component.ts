@@ -122,7 +122,8 @@ export class TableComponent implements OnInit, OnDestroy {
       data: <GiveClueData>{
         table: this.table,
         myPlayer: this.myPlayer
-      }
+      },
+      width: '600px',
     });
   }
 

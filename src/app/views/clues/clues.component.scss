@@ -1,5 +1,9 @@
 @import '../../../scss/colors';
 
+.mdc-list-item.clue {
+  height: 75px;
+}
+
 @media (prefers-color-scheme: light) {
   .clue {
     color: #222;
@@ -20,6 +24,7 @@
   }
 
   .pending-clue {
+    white-space: pre-line;
     color: #222;
 
     &.red {
@@ -68,6 +73,7 @@
   }
 
   .pending-clue {
+    white-space: pre-line;
     color: #222;
 
     &.red {

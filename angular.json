@@ -20,11 +20,6 @@
               "src/assets"
             ],
             "styles": [
-              {
-                "input": "src/scss/style.scss",
-                "inject": false,
-                "bundleName": "external-module"
-              },
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
               "src/scss/style.scss"
@@ -58,7 +53,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "kodenames:build"
+            "buildTarget": "kodenames:build"
           },
           "configurations": {
             "production": {
@@ -69,7 +64,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "kodenames:build"
+            "buildTarget": "kodenames:build"
           }
         },
         "test": {
@@ -81,11 +76,6 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              {
-                "input": "src/scss/style.scss",
-                "inject": false,
-                "bundleName": "external-module"
-              },
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
               "src/scss/style.scss"
@@ -119,11 +109,9 @@
       }
     }
   },
-  "defaultProject": "kodenames",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "kod",
-      "styleext": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "kod"
