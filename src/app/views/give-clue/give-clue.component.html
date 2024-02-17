@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Give a Clue</h2>
 <mat-dialog-content>
     <form class="clue-form" [formGroup]="formGroup">
-        <mat-form-field class="clue">
+        <mat-form-field class="clue" fxFlex>
             <mat-label>Clue</mat-label>
             <input matInput
                    formControlName="clue"
@@ -11,7 +11,7 @@
                 Clue is <strong>required</strong>
             </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" fxFlex>
             <mat-label>Guesses</mat-label>
             <mat-select matNativeControl formControlName="guesses">
                 <mat-option value="unlimited">Unlimited</mat-option>
