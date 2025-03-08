@@ -1,23 +1,47 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Table, CARD_COLUMNS, CARD_ROWS, CardColor, Player, Clue } from '@models';
 import { GiveClueComponent, GiveClueData } from '@views/give-clue/give-clue.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AudioService } from '@services/audio.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'kod-clues',
   templateUrl: './clues.component.html',
   styleUrls: ['./clues.component.scss'],
 })
-export class CluesComponent {
+export class CluesComponent implements OnInit, OnDestroy {
   @Input()
   table: Table | null;
 
   @Input()
   myPlayer: Player;
 
+  private previousCluesLength = 0;
+  private tableSubscription: Subscription;
+
   constructor(
-      private dialog: MatDialog
+      private dialog: MatDialog,
+      private audioService: AudioService
   ) {}
+
+  ngOnInit() {
+    // Subscribe to table changes to detect new clues
+    this.tableSubscription = this.table?.onUpdate.subscribe(() => {
+      if (this.table && this.table.clues.length > this.previousCluesLength) {
+        const latestClue = this.table.clues[this.table.clues.length - 1];
+        // Only play sound if we're not the spymaster who gave the clue
+        if (!this.myPlayer?.spymaster || this.myPlayer?.team !== latestClue.team) {
+          this.audioService.playDing();
+        }
+      }
+      this.previousCluesLength = this.table?.clues.length || 0;
+    });
+  }
+
+  ngOnDestroy() {
+    this.tableSubscription?.unsubscribe();
+  }
 
   iconForClue(clue: Clue, isLast: boolean): string {
     if (clue.chosenCards.some(card => card.color !== clue.team)) {

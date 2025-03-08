@@ -11,6 +11,8 @@ import { MaterialModule } from './material.module';
 import { MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS } from '@angular/material/progress-spinner';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { AppComponent } from './app.component';
 
 // Import routing module
@@ -27,6 +29,7 @@ import { ViewsModule } from '@views/views.module';
     CommonModule,
     BrowserModule,
     AppRoutingModule,
+    FlexLayoutModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

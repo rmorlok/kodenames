@@ -21,6 +21,7 @@ export const CARD_COLUMNS = 5;
 
 export class Table implements TableState {
   private readySubject = new BehaviorSubject<boolean>(false);
+  private updateSubject = new BehaviorSubject<void>(undefined);
 
   constructor(
       private stateDoc: AngularFirestoreDocument<TableState>
@@ -28,11 +29,16 @@ export class Table implements TableState {
       this.subscription = this.stateDoc.valueChanges().subscribe(gs => {
         this.state = gs;
         this.readySubject.next(true);
+        this.updateSubject.next();
       });
   }
 
   get ready$(): Observable<boolean> {
     return this.readySubject.asObservable();
+  }
+
+  get onUpdate(): Observable<void> {
+    return this.updateSubject.asObservable();
   }
 
   get id(): string {
