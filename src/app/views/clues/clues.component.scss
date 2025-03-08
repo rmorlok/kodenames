@@ -2,6 +2,10 @@
 
 .mdc-list-item.clue {
   height: 75px;
+
+  .mdc-list-item__primary-text {
+    white-space: normal !important;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -12,20 +16,18 @@
       .mdc-list-item__start {
         color: $redTextLight;
       }
-      .mdc-list-item__content {
-        color: $redTextLight;
+      .mdc-list-item__primary-text {
+        color: $redTextLight !important;
       }
-      --mdc-list-list-item-label-text-color: $redTextLight;
     }
 
     &.blue {
       .mdc-list-item__start {
         color: $blueTextLight;
       }
-      .mdc-list-item__content {
-        color: $blueTextLight;
+      .mdc-list-item__primary-text {
+        color: $blueTextLight !important;
       }
-      --mdc-list-list-item-label-text-color: $blueTextLight;
     }
 
     mat-icon {
@@ -77,20 +79,18 @@
       .mdc-list-item__start {
         color: $redTextDark;
       }
-      .mdc-list-item__content {
-        color: $redTextDark;
+      .mdc-list-item__primary-text {
+        color: $redTextDark !important;
       }
-      --mdc-list-list-item-label-text-color: $redTextDark;
     }
 
     &.blue {
       .mdc-list-item__start {
         color: $blueTextDark;
       }
-      .mdc-list-item__content {
-        color: $blueTextDark;
+      .mdc-list-item__primary-text {
+        color: $blueTextDark !important;
       }
-      --mdc-list-list-item-label-text-color: $blueTextDark;
     }
 
     mat-icon {
