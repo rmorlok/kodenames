@@ -12,11 +12,17 @@
       .mdc-list-item__start {
         color: $redTextLight;
       }
+      .mdc-list-item__content {
+        color: $redTextLight;
+      }
       --mdc-list-list-item-label-text-color: $redTextLight;
     }
 
     &.blue {
       .mdc-list-item__start {
+        color: $blueTextLight;
+      }
+      .mdc-list-item__content {
         color: $blueTextLight;
       }
       --mdc-list-list-item-label-text-color: $blueTextLight;
@@ -71,11 +77,17 @@
       .mdc-list-item__start {
         color: $redTextDark;
       }
+      .mdc-list-item__content {
+        color: $redTextDark;
+      }
       --mdc-list-list-item-label-text-color: $redTextDark;
     }
 
     &.blue {
       .mdc-list-item__start {
+        color: $blueTextDark;
+      }
+      .mdc-list-item__content {
         color: $blueTextDark;
       }
       --mdc-list-list-item-label-text-color: $blueTextDark;
