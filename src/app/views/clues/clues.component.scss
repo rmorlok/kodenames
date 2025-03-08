@@ -2,10 +2,6 @@
 
 .mdc-list-item.clue {
   height: 75px;
-
-  .mdc-list-item__primary-text {
-    white-space: normal !important;
-  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -16,8 +12,9 @@
       .mdc-list-item__start {
         color: $redTextLight;
       }
-      .mdc-list-item__primary-text {
-        color: $redTextLight !important;
+
+      .clue-text {
+        color: $redTextLight;
       }
     }
 
@@ -25,8 +22,9 @@
       .mdc-list-item__start {
         color: $blueTextLight;
       }
-      .mdc-list-item__primary-text {
-        color: $blueTextLight !important;
+
+      .clue-text {
+        color: $blueTextLight;
       }
     }
 
@@ -79,8 +77,9 @@
       .mdc-list-item__start {
         color: $redTextDark;
       }
-      .mdc-list-item__primary-text {
-        color: $redTextDark !important;
+
+      .clue-text {
+        color: $redTextDark;
       }
     }
 
@@ -88,8 +87,9 @@
       .mdc-list-item__start {
         color: $blueTextDark;
       }
-      .mdc-list-item__primary-text {
-        color: $blueTextDark !important;
+
+      .clue-text {
+        color: $blueTextDark;
       }
     }
 
