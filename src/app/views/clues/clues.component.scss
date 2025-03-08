@@ -7,19 +7,23 @@
 @media (prefers-color-scheme: light) {
   .clue {
     color: #222;
-    --mdc-list-list-item-label-text-color: #222;
-    --mdc-list-list-item-leading-icon-color: #222;
 
     &.red {
-      color: #790242;
-      --mdc-list-list-item-label-text-color: #790242;
-      --mdc-list-list-item-leading-icon-color: #790242;
+      .mdc-list-item__start {
+        color: $redTextLight;
+      }
+      --mdc-list-list-item-label-text-color: $redTextLight;
     }
 
     &.blue {
-      color: darkblue;
-      --mdc-list-list-item-label-text-color: darkblue;
-      --mdc-list-list-item-leading-icon-color: darkblue;
+      .mdc-list-item__start {
+        color: $blueTextLight;
+      }
+      --mdc-list-list-item-label-text-color: $blueTextLight;
+    }
+
+    mat-icon {
+      color: inherit;
     }
   }
 
@@ -28,11 +32,11 @@
     color: #222;
 
     &.red {
-      color: #790242;
+      color: $redTextLight;
     }
 
     &.blue {
-      color: darkblue;
+      color: $blueTextLight;
     }
   }
 
@@ -42,11 +46,11 @@
     }
 
     &.wrongBlue {
-      color: darkblue;
+      color: $blueTextLight;
     }
 
     &.wrongRed {
-      color: #790242;
+      color: $redTextLight;
     }
 
     &.wrongYellow {
@@ -61,27 +65,37 @@
 
 @media (prefers-color-scheme: dark) {
   .clue {
-    color: #222;
+    color: #fff;
 
     &.red {
-      color: #ff7272;
+      .mdc-list-item__start {
+        color: $redTextDark;
+      }
+      --mdc-list-list-item-label-text-color: $redTextDark;
     }
 
     &.blue {
-      color: #7b7bff;
+      .mdc-list-item__start {
+        color: $blueTextDark;
+      }
+      --mdc-list-list-item-label-text-color: $blueTextDark;
+    }
+
+    mat-icon {
+      color: inherit;
     }
   }
 
   .pending-clue {
     white-space: pre-line;
-    color: #222;
+    color: #fff;
 
     &.red {
-      color: #ff7272;
+      color: $redTextDark;
     }
 
     &.blue {
-      color: #7b7bff;
+      color: $blueTextDark;
     }
   }
 
@@ -91,11 +105,11 @@
     }
 
     &.wrongBlue {
-      color: #7b7bff;
+      color: $blueTextDark;
     }
 
     &.wrongRed {
-      color: #ff7272;
+      color: $redTextDark;
     }
 
     &.wrongYellow {
@@ -103,8 +117,8 @@
     }
 
     &.wrongBlack {
-      color: black;
-      text-shadow: white 0 0 3px;
+      color: white;
+      text-shadow: black 0 0 3px;
     }
   }
 }
