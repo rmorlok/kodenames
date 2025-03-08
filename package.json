@@ -41,7 +41,7 @@
     "@angular/router": "^17.1.1",
     "core-js": "^3.21.1",
     "events": "^3.3.0",
-    "firebase": "^9.6.9",
+    "firebase": "^11.4.0",
     "font-awesome": "^4.7.0",
     "mutationobserver-shim": "^0.3.7",
     "natives": "^1.1.6",
