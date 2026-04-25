@@ -4,13 +4,13 @@
 name: Deploy to Firebase Hosting on PR
 on: [pull_request]
 env:
-  node-version: 18.x
+  node-version: 22.x
 jobs:
   build_and_preview:
     name: Build, Test, and Preview
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Cache node modules
         uses: actions/cache@v4
@@ -25,9 +25,10 @@ jobs:
             ${{ runner.os }}-
 
       - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.node-version }}
+          cache: 'npm'
 
       - name: Install packages
         run: npm ci

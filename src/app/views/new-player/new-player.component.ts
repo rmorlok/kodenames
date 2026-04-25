@@ -3,9 +3,10 @@ import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { DeviceService } from '@services/device.service';
 
 @Component({
-  selector: 'kod-new-player',
-  templateUrl: './new-player.component.html',
-  styleUrls: ['./new-player.component.scss'],
+    selector: 'kod-new-player',
+    templateUrl: './new-player.component.html',
+    styleUrls: ['./new-player.component.scss'],
+    standalone: false
 })
 export class NewPlayerComponent {
   editForm = this.fb.group({

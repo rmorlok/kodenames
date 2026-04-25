@@ -3,8 +3,8 @@
         <mat-card appearance="outlined">
             <mat-card-content>
                 <h1>Welcome to Kodenames!</h1>
-                <form [formGroup]="editForm" fxLayout="row">
-                    <mat-form-field fxFlex>
+                <form [formGroup]="editForm" style="display: flex; flex-direction: row;">
+                    <mat-form-field style="flex: 1 1 100%;">
                         <mat-label>Enter your name</mat-label>
                         <input matInput formControlName="name" placeholder="Bob Dole">
                     </mat-form-field>
@@ -13,7 +13,7 @@
             <mat-card-actions>
                 <button
                         mat-flat-button
-                        fxFlex
+                        style="flex: 1 1 100%;"
                         color="primary"
                         [disabled]="!editForm.valid"
                         (click)="createPerson()">

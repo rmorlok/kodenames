@@ -1,25 +1,29 @@
 <h2 mat-dialog-title>Give a Clue</h2>
 <mat-dialog-content>
-    <form class="clue-form" [formGroup]="formGroup">
-        <mat-form-field class="clue" fxFlex>
-            <mat-label>Clue</mat-label>
-            <input matInput
-                   formControlName="clue"
-                   placeholder="e.g. Marlon Brando">
-            <mat-hint>Single word or proper name</mat-hint>
-            <mat-error *ngIf="formGroup.hasError('clue')">
-                Clue is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill" fxFlex>
-            <mat-label>Guesses</mat-label>
-            <mat-select matNativeControl formControlName="guesses">
-                <mat-option value="unlimited">Unlimited</mat-option>
-                <mat-option *ngFor="let _ of [].constructor(maxGuesses + 1); index as i" [value]="i">{{ i }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </form>
+  <form class="clue-form" [formGroup]="formGroup">
+    <mat-form-field class="clue" style="flex: 1 1 100%;">
+      <mat-label>Clue</mat-label>
+      <input matInput
+        formControlName="clue"
+        placeholder="e.g. Marlon Brando">
+      <mat-hint>Single word or proper name</mat-hint>
+      @if (formGroup.hasError('clue')) {
+        <mat-error>
+          Clue is <strong>required</strong>
+        </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="flex: 1 1 100%;">
+      <mat-label>Guesses</mat-label>
+      <mat-select matNativeControl formControlName="guesses">
+        <mat-option value="unlimited">Unlimited</mat-option>
+        @for (_ of [].constructor(maxGuesses + 1); track _; let i = $index) {
+          <mat-option [value]="i">{{ i }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="giveClue()" [disabled]="!formGroup.valid">Give Clue</button>
+  <button mat-raised-button color="primary" (click)="giveClue()" [disabled]="!formGroup.valid">Give Clue</button>
 </mat-dialog-actions>

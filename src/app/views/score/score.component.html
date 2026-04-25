@@ -1,8 +1,20 @@
-<div id="score" *ngIf="table">
-    <div *ngIf="table.winner === 'red'" class="winner red">Red Wins!</div>
-    <div *ngIf="table.winner === 'blue'" class="winner blue">Blue Wins!</div>
-    <div *ngIf="table.winner === null">
-        <span class="red">Red: {{ table.redRemaining}} <span *ngIf="table.turn === 'red'">(turn)</span></span>&nbsp;
-        <span class="blue">Blue: {{ table.blueRemaining}} <span *ngIf="table.turn === 'blue'">(turn)</span></span>
-    </div>
-</div>
+@if (table) {
+  <div id="score">
+    @if (table.winner === 'red') {
+      <div class="winner red">Red Wins!</div>
+    }
+    @if (table.winner === 'blue') {
+      <div class="winner blue">Blue Wins!</div>
+    }
+    @if (table.winner === null) {
+      <div>
+        <span class="red">Red: {{ table.redRemaining}} @if (table.turn === 'red') {
+          <span>(turn)</span>
+        }</span>&nbsp;
+        <span class="blue">Blue: {{ table.blueRemaining}} @if (table.turn === 'blue') {
+          <span>(turn)</span>
+        }</span>
+      </div>
+    }
+  </div>
+}

@@ -1,21 +1,20 @@
-// app.component.spec.ts
-import { TestBed, async } from '@angular/core/testing'; // 1
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
 
-describe('AppComponent', () => { // 2
-    beforeEach(async(() => { // 3
+describe('AppComponent', () => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent
             ],
             imports: [
-                RouterTestingModule
+                RouterModule.forRoot([])
             ]
         }).compileComponents();
     }));
 
-    it('should create the app', () => { // 4
+    it('should create the app', () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
         expect(app).toBeTruthy();

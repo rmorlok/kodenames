@@ -5,9 +5,10 @@ import { TableService } from '@services/table.service';
 import { TableIdValidator } from '@app/validators/table-id.validator';
 
 @Component({
-  selector: 'kod-pick-table',
-  templateUrl: './pick-table.component.html',
-  styleUrls: ['./pick-table.component.scss'],
+    selector: 'kod-pick-table',
+    templateUrl: './pick-table.component.html',
+    styleUrls: ['./pick-table.component.scss'],
+    standalone: false
 })
 export class PickTableComponent {
   editForm = this.fb.group({

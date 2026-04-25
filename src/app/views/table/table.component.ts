@@ -11,9 +11,10 @@ import { GiveClueComponent, GiveClueData } from '@views/give-clue/give-clue.comp
 type UIMode = 'create-player' | 'pick-table' | 'lobby' | 'play';
 
 @Component({
-  selector: 'kod-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+    selector: 'kod-table',
+    templateUrl: './table.component.html',
+    styleUrls: ['./table.component.scss'],
+    standalone: false
 })
 export class TableComponent implements OnInit, OnDestroy {
   stateSubscription: Subscription | null;

@@ -9,8 +9,9 @@ export interface GiveClueData {
 }
 
 @Component({
-  templateUrl: './give-clue.component.html',
-  styleUrls: ['./give-clue.component.scss'],
+    templateUrl: './give-clue.component.html',
+    styleUrls: ['./give-clue.component.scss'],
+    standalone: false
 })
 export class GiveClueComponent {
   formGroup = this.fb.group({

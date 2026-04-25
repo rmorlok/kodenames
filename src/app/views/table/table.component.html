@@ -1,83 +1,98 @@
-<kod-new-player
-        *ngIf="mode === 'create-player'"></kod-new-player>
+@if (mode === 'create-player') {
+  <kod-new-player
+  ></kod-new-player>
+}
 
-<kod-pick-table
-        *ngIf="mode === 'pick-table'"></kod-pick-table>
+@if (mode === 'pick-table') {
+  <kod-pick-table
+  ></kod-pick-table>
+}
 
-<kod-lobby
-        *ngIf="mode === 'lobby'"
-        [table]="table"></kod-lobby>
+@if (mode === 'lobby') {
+  <kod-lobby
+  [table]="table"></kod-lobby>
+}
 
-<ng-container *ngIf="mode === 'play'">
-    <ng-container>
-        <mat-toolbar class="primary-toolbar header-wrapper"
-                     fxLayout="row">
-            <div>
-                <button type="button"
-                        aria-label="Toggle clues"
-                        mat-button
-                        (click)="drawer.toggle()"
-                        *ngIf="(isHandset$ | async)">
-                    <mat-icon aria-label="Toggle clues">menu</mat-icon>
-                </button>
-                <div class="header-logo-img-wrapper" fxFlex>
-                    <img class="header-logo-img" src="/assets/img/MorlokTechnologiesIcon.png" />
-                </div>
-            </div>
-            <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly center" >
-                <div id="table-id" *ngIf="table">TABLE ID#{{table.id}}</div>
-                <kod-score [table]="table"></kod-score>
-                <button mat-raised-button color="primary" *ngIf="canGiveClue" (click)="giveClue()">Give Clue</button>
-                <button mat-raised-button color="primary" *ngIf="canPass" (click)="pass()">{{ passText }}</button>
-                <button mat-raised-button color="primary" *ngIf="showNewGame" (click)="newGame()">New Game</button>
-            </div>
-            <div>
-                <button mat-button
-                        id="my-profile-button"
-                        [matMenuTriggerFor]="menu"
-                        class="personButton"
-                        [class.red]="myPlayer?.team === 'red'"
-                        [class.blue]="myPlayer?.team === 'blue'">
-                    <div fxLayout="row" fxFlex>
-                        <div class="avatar">
-                            <img src="/assets/img/user.png" class="profile-img" [alt]="state.person.name" />
-                        </div>&nbsp;
-                        <span class="name">
-                            {{ state.person.name }}
-                            <span *ngIf="myPlayer?.spymaster">(spymaster)</span>
-                        </span>
-                    </div>
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-            </div>
-            <mat-menu #menu="matMenu" style="padding-right: 10px;">
-                <button mat-menu-item (click)="endGame()">
-                    <mat-icon>close</mat-icon>
-                    <span>End Game</span>
-                </button>
-                <button mat-menu-item (click)="leaveTable()">
-                    <mat-icon>videogame_asset</mat-icon>
-                    <span>Leave Table</span>
-                </button>
-                <button mat-menu-item (click)="logout()">
-                    <mat-icon>lock</mat-icon>
-                    <span>Log Out</span>
-                </button>
-            </mat-menu>
-        </mat-toolbar>
-
-        <mat-sidenav-container class="sidenav-container">
-            <mat-sidenav #drawer class="sidenav"
-                         fixedInViewport="true"
-                         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-                         [mode]="(isHandset$ | async) ? 'over' : 'side'"
-                         [opened]="!(isHandset$ | async)">
-                <kod-clues [table]="table" [myPlayer]="myPlayer"></kod-clues>
-            </mat-sidenav>
-            <mat-sidenav-content>
-                <kod-cards [table]="table" [myPlayer]="myPlayer"></kod-cards>
-            </mat-sidenav-content>
-        </mat-sidenav-container>
-
-    </ng-container>
-</ng-container>
+@if (mode === 'play') {
+  <ng-container>
+    <mat-toolbar class="primary-toolbar header-wrapper"
+      style="display: flex; flex-direction: row;">
+      <div>
+        @if ((isHandset$ | async)) {
+          <button type="button"
+            aria-label="Toggle clues"
+            mat-button
+            (click)="drawer.toggle()"
+            >
+            <mat-icon aria-label="Toggle clues">menu</mat-icon>
+          </button>
+        }
+        <div class="header-logo-img-wrapper" style="flex: 1 1 100%;">
+          <img class="header-logo-img" src="/assets/img/MorlokTechnologiesIcon.png" />
+        </div>
+      </div>
+      <div style="flex: 1 1 100%; display: flex; flex-direction: row; justify-content: space-evenly; align-items: center;">
+        @if (table) {
+          <div id="table-id">TABLE ID#{{table.id}}</div>
+        }
+        <kod-score [table]="table"></kod-score>
+        @if (canGiveClue) {
+          <button mat-raised-button color="primary" (click)="giveClue()">Give Clue</button>
+        }
+        @if (canPass) {
+          <button mat-raised-button color="primary" (click)="pass()">{{ passText }}</button>
+        }
+        @if (showNewGame) {
+          <button mat-raised-button color="primary" (click)="newGame()">New Game</button>
+        }
+      </div>
+      <div>
+        <button mat-button
+          id="my-profile-button"
+          [matMenuTriggerFor]="menu"
+          class="personButton"
+          [class.red]="myPlayer?.team === 'red'"
+          [class.blue]="myPlayer?.team === 'blue'">
+          <div style="display: flex; flex-direction: row; flex: 1 1 100%;">
+            <div class="avatar">
+              <img src="/assets/img/user.png" class="profile-img" [alt]="state.person.name" />
+            </div>&nbsp;
+            <span class="name">
+              {{ state.person.name }}
+              @if (myPlayer?.spymaster) {
+                <span>(spymaster)</span>
+              }
+            </span>
+          </div>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+      <mat-menu #menu="matMenu" style="padding-right: 10px;">
+        <button mat-menu-item (click)="endGame()">
+          <mat-icon>close</mat-icon>
+          <span>End Game</span>
+        </button>
+        <button mat-menu-item (click)="leaveTable()">
+          <mat-icon>videogame_asset</mat-icon>
+          <span>Leave Table</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>lock</mat-icon>
+          <span>Log Out</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #drawer class="sidenav"
+        fixedInViewport="true"
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="!(isHandset$ | async)">
+        <kod-clues [table]="table" [myPlayer]="myPlayer"></kod-clues>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <kod-cards [table]="table" [myPlayer]="myPlayer"></kod-cards>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </ng-container>
+}

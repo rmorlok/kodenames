@@ -3,9 +3,8 @@ import {
     Table,
     TableState
 } from '@models';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { AngularFirestoreCollection } from '@angular/fire/compat/firestore/collection/collection';
 
 @Injectable({
     providedIn: 'root',

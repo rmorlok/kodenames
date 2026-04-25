@@ -6,9 +6,10 @@ import { AudioService } from '@services/audio.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'kod-clues',
-  templateUrl: './clues.component.html',
-  styleUrls: ['./clues.component.scss'],
+    selector: 'kod-clues',
+    templateUrl: './clues.component.html',
+    styleUrls: ['./clues.component.scss'],
+    standalone: false
 })
 export class CluesComponent implements OnInit, OnDestroy {
   @Input()

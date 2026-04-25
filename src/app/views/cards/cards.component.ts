@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Table, CARD_COLUMNS, CARD_ROWS, CardColor, Player } from '@models';
 
 @Component({
-  selector: 'kod-cards',
-  templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss'],
+    selector: 'kod-cards',
+    templateUrl: './cards.component.html',
+    styleUrls: ['./cards.component.scss'],
+    standalone: false
 })
 export class CardsComponent {
   @Input()
