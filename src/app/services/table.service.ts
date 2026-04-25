@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EnvironmentInjector, Injectable, inject, runInInjectionContext } from '@angular/core';
 import {
     Table,
     TableState
@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class TableService {
+    private readonly injector = inject(EnvironmentInjector);
+
     constructor(
         private firestore: AngularFirestore
     ) {
@@ -37,7 +39,7 @@ export class TableService {
 
     getTable(tableId: string): Observable<Table> {
         return new Observable<Table>(observer => {
-            const table = new Table(this.documentForId(tableId)),
+            const table = new Table(this.documentForId(tableId), this.injector),
                 s = table.ready$.subscribe(
                     ready => {
                         if (ready) {
@@ -67,7 +69,7 @@ export class TableService {
 
             doc.set(tableState);
 
-            const table = new Table(doc),
+            const table = new Table(doc, this.injector),
                 s = table.ready$.subscribe(
                     ready => {
                         if (ready) {
@@ -88,10 +90,10 @@ export class TableService {
     }
 
     private tableStateCollection(): AngularFirestoreCollection<TableState> {
-        return this.firestore.collection<TableState>('tables');
+        return runInInjectionContext(this.injector, () => this.firestore.collection<TableState>('tables'));
     }
 
     private documentForId(tableId: string): AngularFirestoreDocument<TableState> {
-        return this.tableStateCollection().doc<TableState>(tableId);
+        return runInInjectionContext(this.injector, () => this.tableStateCollection().doc<TableState>(tableId));
     }
 }

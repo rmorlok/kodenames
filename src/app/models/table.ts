@@ -2,6 +2,7 @@ import { Player } from './player';
 import { Clue } from './clue';
 import { Card, CardColor } from './card';
 import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import Words from '../../assets/data/words.json';
 import { Person } from './person';
@@ -24,12 +25,15 @@ export class Table implements TableState {
   private updateSubject = new BehaviorSubject<void>(undefined);
 
   constructor(
-      private stateDoc: AngularFirestoreDocument<TableState>
+      private stateDoc: AngularFirestoreDocument<TableState>,
+      private injector: EnvironmentInjector
   ) {
-      this.subscription = this.stateDoc.valueChanges().subscribe(gs => {
-        this.state = gs;
-        this.readySubject.next(true);
-        this.updateSubject.next();
+      runInInjectionContext(this.injector, () => {
+          this.subscription = this.stateDoc.valueChanges().subscribe(gs => {
+              this.state = gs;
+              this.readySubject.next(true);
+              this.updateSubject.next();
+          });
       });
   }
 
