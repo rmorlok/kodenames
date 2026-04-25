@@ -1,89 +1,108 @@
 <div class="single-card-page">
-    <div id="lobby">
-        <mat-card appearance="outlined">
-            <mat-card-content fxLayout="column">
-                <h1>Pick Teams</h1>
+  <div id="lobby">
+    <mat-card appearance="outlined">
+      <mat-card-content style="display: flex; flex-direction: column;">
+        <h1>Pick Teams</h1>
 
-                <p id="table-id">Table ID#{{table.id}}</p>
-                <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="30px">
-                    <div class="player-list-wrapper" *ngFor="let team of ['red', 'blue']" fxFlex>
-                        <mat-list class="player-list" [class]="team" fxFlex>
-                            <h2 class="team-title"
-                                [class.red]="team === 'red'"
-                                [class.blue]="team === 'blue'">{{ team }} Team</h2>
-                            <mat-list-item *ngFor="let player of sortedPlayers(team)"
-                                           [class]="team" [title]="player.spymaster ? 'spymaster' : 'normal player'">
-
-                                <mat-icon matListItemIcon>{{ player.spymaster ? 'fingerprint' : 'person' }}</mat-icon>
-                                <div mat-line>
-                                    <span>{{ player.person.name }}</span>
-                                    <span *ngIf="player.person.uuid === myPlayer?.person?.uuid">&nbsp; (me)</span>
-                                    <span *ngIf="player.person.uuid !== myPlayer?.person?.uuid && player.spymaster" class="spymaster">&nbsp; (spymaster)</span>
-                                </div>
-                                <button
-                                        mat-icon-button
-                                        class="remove-menu"
-                                        *ngIf="myPlayer?.person?.uuid !== player.person.uuid"
-                                        [matMenuTriggerFor]="menu"
-                                        aria-label="Remove player"
-                                        matListItemMeta>
-                                    <mat-icon>more_vert</mat-icon>
-                                </button>
-                                <mat-menu #menu="matMenu">
-                                    <button mat-menu-item (click)="remove(player)">
-                                        <mat-icon>person_off</mat-icon>
-                                        <span>Remove</span>
-                                    </button>
-                                </mat-menu>
-                            </mat-list-item>
-                            <button mat-list-item
-                                    *ngIf="!myPlayer || myPlayer.team !== team"
-                                    (click)="setTeam(team)"
-                                    style="text-transform: capitalize">
-                                <mat-icon>person_add</mat-icon>&nbsp;&nbsp;Play {{ team }}
-                            </button>
-                            <button
-                                    mat-list-item
-                                    *ngIf="myPlayer && !myPlayer.spymaster && myPlayer.team === team"
-                                    (click)="makeSpymaster()">
-                                <mat-icon>fingerprint</mat-icon>&nbsp;&nbsp;I'm the spymaster
-                            </button>
-                        </mat-list>
+        <p id="table-id">Table ID#{{table.id}}</p>
+        <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: flex-start; gap: 30px;">
+          @for (team of ['red', 'blue']; track team) {
+            <div class="player-list-wrapper" style="flex: 1 1 100%;">
+              <mat-list class="player-list" [class]="team" style="flex: 1 1 100%;">
+                <h2 class="team-title"
+                  [class.red]="team === 'red'"
+                [class.blue]="team === 'blue'">{{ team }} Team</h2>
+                @for (player of sortedPlayers(team); track player) {
+                  <mat-list-item
+                    [class]="team" [title]="player.spymaster ? 'spymaster' : 'normal player'">
+                    <mat-icon matListItemIcon>{{ player.spymaster ? 'fingerprint' : 'person' }}</mat-icon>
+                    <div mat-line>
+                      <span>{{ player.person.name }}</span>
+                      @if (player.person.uuid === myPlayer?.person?.uuid) {
+                        <span>&nbsp; (me)</span>
+                      }
+                      @if (player.person.uuid !== myPlayer?.person?.uuid && player.spymaster) {
+                        <span class="spymaster">&nbsp; (spymaster)</span>
+                      }
                     </div>
-                </div>
-                <p class="needed red text" *ngIf="!spyMaster('red')">Red needs a spymaster</p>
-                <p class="needed blue text" *ngIf="!spyMaster('blue')">Blue needs a spymaster</p>
-                <p class="needed red text" *ngIf="spyMaster('red') && nonSpymasterPlayers('red').length < 1">Red needs more players</p>
-                <p class="needed blue text" *ngIf="spyMaster('blue') && nonSpymasterPlayers('blue').length < 1">Blue needs more players</p>
-            </mat-card-content>
-            <mat-card-actions fxLayout="row" fxLayoutGap="20px">
-                <button
-                        mat-flat-button
-                        color="warn"
-                        fxFlex
-                        (click)="logout()">
-                    Logout
-                    <mat-icon matSuffix>close</mat-icon>
-                </button>
-                <button
-                        mat-flat-button
-                        color="primary"
-                        fxFlex
-                        (click)="leave()">
-                    Leave Table
-                    <mat-icon matSuffix>exit_to_app</mat-icon>
-                </button>
-                <button
-                        *ngIf="!gameInProgress"
-                        mat-flat-button
-                        color="primary"
-                        fxFlex
-                        [disabled]="!ready"
-                        (click)="startGame()">
-                    Start Game
-                    <mat-icon matSuffix>play_arrow</mat-icon>
-                </button>
-            </mat-card-actions>
-        </mat-card>
-    </div>
+                    @if (myPlayer?.person?.uuid !== player.person.uuid) {
+                      <button
+                        mat-icon-button
+                        class="remove-menu"
+                        [matMenuTriggerFor]="menu"
+                        aria-label="Remove player"
+                        matListItemMeta>
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                    }
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="remove(player)">
+                        <mat-icon>person_off</mat-icon>
+                        <span>Remove</span>
+                      </button>
+                    </mat-menu>
+                  </mat-list-item>
+                }
+                @if (!myPlayer || myPlayer.team !== team) {
+                  <button mat-list-item
+                    (click)="setTeam(team)"
+                    style="text-transform: capitalize">
+                    <mat-icon>person_add</mat-icon>&nbsp;&nbsp;Play {{ team }}
+                  </button>
+                }
+                @if (myPlayer && !myPlayer.spymaster && myPlayer.team === team) {
+                  <button
+                    mat-list-item
+                    (click)="makeSpymaster()">
+                    <mat-icon>fingerprint</mat-icon>&nbsp;&nbsp;I'm the spymaster
+                  </button>
+                }
+              </mat-list>
+            </div>
+          }
+        </div>
+        @if (!spyMaster('red')) {
+          <p class="needed red text">Red needs a spymaster</p>
+        }
+        @if (!spyMaster('blue')) {
+          <p class="needed blue text">Blue needs a spymaster</p>
+        }
+        @if (spyMaster('red') && nonSpymasterPlayers('red').length < 1) {
+          <p class="needed red text">Red needs more players</p>
+        }
+        @if (spyMaster('blue') && nonSpymasterPlayers('blue').length < 1) {
+          <p class="needed blue text">Blue needs more players</p>
+        }
+      </mat-card-content>
+      <mat-card-actions style="display: flex; flex-direction: row; gap: 20px;">
+        <button
+          mat-flat-button
+          color="warn"
+          style="flex: 1 1 100%;"
+          (click)="logout()">
+          Logout
+          <mat-icon matSuffix>close</mat-icon>
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          style="flex: 1 1 100%;"
+          (click)="leave()">
+          Leave Table
+          <mat-icon matSuffix>exit_to_app</mat-icon>
+        </button>
+        @if (!gameInProgress) {
+          <button
+            mat-flat-button
+            color="primary"
+            style="flex: 1 1 100%;"
+            [disabled]="!ready"
+            (click)="startGame()">
+            Start Game
+            <mat-icon matSuffix>play_arrow</mat-icon>
+          </button>
+        }
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

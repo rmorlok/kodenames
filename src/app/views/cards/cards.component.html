@@ -1,24 +1,24 @@
 <div id="cards-wrapper"
-     fxLayout="column"
-     fxLayoutGap="10px">
-    <div *ngFor="let x of [].constructor(rowCount); let row = index"
-         class="card-row"
-         fxLayout="row"
-         fxFlex
-         fxLayoutGap="10px">
-        <div *ngFor="let y of [].constructor(columnCount); let col = index"
-             [class.revealed]="isRevealed(row, col)"
-             [class.spymaster]="isSpymaster"
-             [class.gameOver]="!!table.winner"
-             [class.red]="showRed(row, col)"
-             [class.blue]="showBlue(row, col)"
-             [class.yellow]="showYellow(row, col)"
-             [class.black]="showBlack(row, col)"
-             [class.green]="showGreen(row, col)"
-             [class.pickable]="canPick(row, col)"
-             (click)="revealCard(row, col)"
-             class="card"
-             fxFlex
-             fxLayoutAlign="center center">{{ table.cardFor(row, col).word }}</div>
+  style="display: flex; flex-direction: column; gap: 10px;">
+  @for (x of [].constructor(rowCount); track x; let row = $index) {
+    <div
+      class="card-row"
+      style="display: flex; flex-direction: row; flex: 1 1 100%; gap: 10px;">
+      @for (y of [].constructor(columnCount); track y; let col = $index) {
+        <div
+          [class.revealed]="isRevealed(row, col)"
+          [class.spymaster]="isSpymaster"
+          [class.gameOver]="!!table.winner"
+          [class.red]="showRed(row, col)"
+          [class.blue]="showBlue(row, col)"
+          [class.yellow]="showYellow(row, col)"
+          [class.black]="showBlack(row, col)"
+          [class.green]="showGreen(row, col)"
+          [class.pickable]="canPick(row, col)"
+          (click)="revealCard(row, col)"
+          class="card"
+        style="flex: 1 1 100%; display: flex; justify-content: center; align-items: center;">{{ table.cardFor(row, col).word }}</div>
+      }
     </div>
+  }
 </div>

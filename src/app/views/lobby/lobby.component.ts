@@ -6,9 +6,10 @@ import { DeviceState, Table, Player, Team } from '@models';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'kod-lobby',
-  templateUrl: './lobby.component.html',
-  styleUrls: ['./lobby.component.scss'],
+    selector: 'kod-lobby',
+    templateUrl: './lobby.component.html',
+    styleUrls: ['./lobby.component.scss'],
+    standalone: false
 })
 export class LobbyComponent implements OnInit, OnDestroy {
   @Input()
