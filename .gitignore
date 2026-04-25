@@ -3,3 +3,4 @@ dist
 node_modules
 .DS_Store
 .angular
+.claude/settings.local.json
